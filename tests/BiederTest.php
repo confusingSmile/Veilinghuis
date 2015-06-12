@@ -1,12 +1,13 @@
 <?php
 
-require '..\Veilinghuis\Bieder.php';
+require __DIR__.'\..\Veilinghuis\Bieder.php';
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
 use Veilinghuis\Bieder;
+use Veilinghuis\Entities\Naam;
 /**
  * Description of BiederTest
  *
@@ -19,12 +20,12 @@ class BiederTest extends \PHPUnit_Framework_TestCase{
      * @expectedExceptionMessage Voorbod moet positief zijn
      */
     function testVoorbodMagNietNegatiefZijn(){
-        $bieder = new Bieder('Piet', 'adres 2b', 'woonplaats', 20);
+        $bieder = new Bieder(new Naam('voornaam', 'tussen', 'achternaam'), 'adres 2b', 'woonplaats', 20);
         $bieder->setMaxVoorbod(-5);
     }
     
     function testVoorbodIsJuist(){
-        $bieder = new Bieder('Piet', 'adres 2b', 'woonplaats', 20);
+        $bieder = new Bieder(new Naam('voornaam', 'tussen', 'achternaam'), 'adres 2b', 'woonplaats', 20);
         $bieder->setMaxVoorbod(5);
         $this->assertSame(5, $bieder->getMaxVoorbod());
     }
@@ -34,7 +35,7 @@ class BiederTest extends \PHPUnit_Framework_TestCase{
      * @expectedExceptionMessage Voorbod moet numeriek zijn
      */ 
     function testVoorbodMoetEenGetalZijn(){
-        $bieder = new Bieder('Piet', 'adres 2b', 'woonplaats', 20);
+        $bieder = new Bieder(new Naam('voornaam', 'tussen', 'achternaam'), 'adres 2b', 'woonplaats', 20);
         $bieder->setMaxVoorbod('aap');
     }
     
@@ -47,8 +48,8 @@ class BiederTest extends \PHPUnit_Framework_TestCase{
     }
     
     function testNaamIsJuist(){
-        $bieder = new Bieder(new Naam('voornaam', 'tussen', 'achternaam'), 
-                             'adres 2b', 'woonplaats', 20);
-        assertSame('Piet', $bieder->getNaam());
+        $biederNaam = new Naam('voornaam', 'tussen', 'achternaam');
+        $bieder = new Bieder($biederNaam, 'adres 2b', 'woonplaats', 20);
+        $this->assertSame($biederNaam, $bieder->getNaam());
     }
 }

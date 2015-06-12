@@ -1,6 +1,6 @@
 <?php
 
-require '..\Veilinghuis\entities\Naam.php';
+require __DIR__.'\..\Veilinghuis\entities\Naam.php';
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -22,10 +22,7 @@ class NaamTest extends \PHPUnit_Framework_TestCase{
     function testVoornaamMoetStringZijn(){
         $naam = new Naam(1, 'voor de', 'test');
     }
-    
-    function testVoornaamIsJuist(){
-        $naam = new Naam('juisteNaam', 'voor de', 'test');
-    }
+   
     
     /**
      * @expectedException InvalidArgumentException
@@ -43,9 +40,6 @@ class NaamTest extends \PHPUnit_Framework_TestCase{
         $naam = new Naam('juisteNaam', 'maar dit tussenvoegsel is te lang', 'test');
     }
     
-    function testTussenvoegselIsJuist(){
-        $naam = new Naam('juisteNaam', 'voor de', 'test');
-    }
     
     function testTussenvoegselIsOptioneel(){
         $naam = new Naam('juisteNaam', null, 'test');
@@ -59,7 +53,10 @@ class NaamTest extends \PHPUnit_Framework_TestCase{
         $naam = new Naam('juisteNaam', 'voor de', 4);
     }
     
-    function testAchternaamIsJuist(){
+    function testAlleInputIsJuist(){
         $naam = new Naam('juisteNaam', 'voor de', 'test');
+        $this->assertSame('juisteNaam', $naam->getVoornaam());
+        $this->assertSame('voor de', $naam->getTussenvoegsel());
+        $this->assertSame('test', $naam->getAchternaam());
     }
 }
