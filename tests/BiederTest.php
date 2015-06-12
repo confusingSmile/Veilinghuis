@@ -42,12 +42,13 @@ class BiederTest extends \PHPUnit_Framework_TestCase{
      * @expectedException InvalidArgumentException
      * @expectedExceptionMessage Naam moet een string zijn
      */ 
-    function testNaamIsString(){
+    function testNaamIsNaam(){
         $bieder = new Bieder('array()', 'adres 2b', 'woonplaats', 20);
     }
     
     function testNaamIsJuist(){
-        $bieder = new Bieder('Piet', 'adres 2b', 'woonplaats', 20);
+        $bieder = new Bieder(new Naam('voornaam', 'tussen', 'achternaam'), 
+                             'adres 2b', 'woonplaats', 20);
         assertSame('Piet', $bieder->getNaam());
     }
 }
