@@ -29,8 +29,14 @@ class Naam {
      * @throws InvalidArgumentException
      */
     function setVoornaam($voornaam){
+        if(!$voornaam){
+            throw new \InvalidArgumentException('voornaam mag niet leeg zijn');
+        }
         if(!is_string($voornaam)){
-                throw new \InvalidArgumentException('voornaam moet een string zijn');
+            throw new \InvalidArgumentException('voornaam moet een string zijn');
+        }
+        if(strlen($voornaam) > 50){
+            throw new \InvalidArgumentException('voornaam mag maximaal uit 50 tekens bestaan');
         }
         $this->voornaam = $voornaam;
     }
@@ -40,11 +46,10 @@ class Naam {
      * @param type $tussenvoegsel
      * @throws InvalidArgumentException
      */
-    function setTussenvoegsel($tussenvoegsel) {
+    function setTussenvoegsel($tussenvoegsel){
         if($tussenvoegsel && !is_string($tussenvoegsel)){
                 throw new \InvalidArgumentException('tussenvoegsel moet een string zijn');
         }
-        //TODO catch this off in the GUI by limiting the input to max 10
         if(strlen($tussenvoegsel) > 10){
             throw new \InvalidArgumentException('tussenvoegsel mag maximaal uit 10 tekens bestaan');
         }
@@ -56,22 +61,28 @@ class Naam {
      * @param type $achternaam
      * @throws InvalidArgumentException
      */
-    function setAchternaam($achternaam) {
+    function setAchternaam($achternaam){
+        if(!$achternaam){
+            throw new \InvalidArgumentException('achternaam mag niet leeg zijn');
+        }
         if(!is_string($achternaam)){
                 throw new \InvalidArgumentException('achternaam moet een string zijn');
+        }
+        if(strlen($achternaam) > 51){
+            throw new \InvalidArgumentException('achternaam mag maximaal uit 51 tekens bestaan');
         }
         $this->achternaam = $achternaam;
     }
 
-    function getVoornaam() {
+    function getVoornaam(){
         return $this->voornaam;
     }
 
-    function getTussenvoegsel() {
-        return $this->tussenvoegsel;
+    function getTussenvoegsel(){
+        return (string) $this->tussenvoegsel;
     }
 
-    function getAchternaam() {
+    function getAchternaam(){
         return $this->achternaam;
     }
 

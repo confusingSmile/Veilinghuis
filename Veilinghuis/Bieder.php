@@ -2,6 +2,7 @@
 
 namespace Veilinghuis;
 use Veilinghuis\Entities\Naam;
+use Veilinghuis\Entities\Adres;
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -50,17 +51,17 @@ class Bieder {
 
     public function valideerVoorbod($maxVoorbod) {
         if(!is_numeric($maxVoorbod)){
-            throw new InvalidArgumentException('Voorbod moet numeriek zijn');
+            throw new \InvalidArgumentException('Voorbod moet numeriek zijn');
         
         }
         if ($maxVoorbod < 0) {
-            throw new InvalidArgumentException('Voorbod moet positief zijn');
+            throw new \InvalidArgumentException('Voorbod moet positief zijn');
         }
     }
 
     public function valideerNaam($naam) {
         if(!is_string($naam)){
-                throw new InvalidArgumentException('Naam moet een string zijn');
+                throw new \InvalidArgumentException('Naam moet een string zijn');
             }
     }
     

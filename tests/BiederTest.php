@@ -8,6 +8,7 @@ require __DIR__.'\..\Veilinghuis\Bieder.php';
  */
 use Veilinghuis\Bieder;
 use Veilinghuis\Entities\Naam;
+use Veilinghuis\Entities\Adres;
 /**
  * Description of BiederTest
  *
@@ -20,12 +21,16 @@ class BiederTest extends \PHPUnit_Framework_TestCase{
      * @expectedExceptionMessage Voorbod moet positief zijn
      */
     function testVoorbodMagNietNegatiefZijn(){
-        $bieder = new Bieder(new Naam('voornaam', 'tussen', 'achternaam'), 'adres 2b', 'woonplaats', 20);
+        $biederNaam = new Naam('voornaam', 'tussen', 'achternaam');
+        $biederAdres = new Adres('straat', 2, 'b', 'Gouda', '1234AB');
+        $bieder = new Bieder($biederNaam, $biederAdres, 20);
         $bieder->setMaxVoorbod(-5);
     }
     
     function testVoorbodIsJuist(){
-        $bieder = new Bieder(new Naam('voornaam', 'tussen', 'achternaam'), 'adres 2b', 'woonplaats', 20);
+        $biederNaam = new Naam('voornaam', 'tussen', 'achternaam');
+        $biederAdres = new Adres('straat', 2, 'b', 'Gouda', '1234AB');
+        $bieder = new Bieder($biederNaam, $biederAdres, 20);
         $bieder->setMaxVoorbod(5);
         $this->assertSame(5, $bieder->getMaxVoorbod());
     }
@@ -35,21 +40,10 @@ class BiederTest extends \PHPUnit_Framework_TestCase{
      * @expectedExceptionMessage Voorbod moet numeriek zijn
      */ 
     function testVoorbodMoetEenGetalZijn(){
-        $bieder = new Bieder(new Naam('voornaam', 'tussen', 'achternaam'), 'adres 2b', 'woonplaats', 20);
+        $biederNaam = new Naam('voornaam', 'tussen', 'achternaam');
+        $biederAdres = new Adres('straat', 2, 'b', 'Gouda', '1234AB');
+        $bieder = new Bieder($biederNaam, $biederAdres, 20);
         $bieder->setMaxVoorbod('aap');
     }
     
-    /**
-     * @expectedException InvalidArgumentException
-     * @expectedExceptionMessage Naam moet een string zijn
-     */ 
-    function testNaamIsNaam(){
-        $bieder = new Bieder('array()', 'adres 2b', 'woonplaats', 20);
-    }
-    
-    function testNaamIsJuist(){
-        $biederNaam = new Naam('voornaam', 'tussen', 'achternaam');
-        $bieder = new Bieder($biederNaam, 'adres 2b', 'woonplaats', 20);
-        $this->assertSame($biederNaam, $bieder->getNaam());
-    }
 }

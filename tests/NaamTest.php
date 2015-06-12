@@ -17,10 +17,26 @@ class NaamTest extends \PHPUnit_Framework_TestCase{
     
     /**
      * @expectedException InvalidArgumentException
+     * @expectedExceptionMessage voornaam mag niet leeg zijn
+     */
+    function testVoornaamMagNietLeegZijn(){
+        $naam = new Naam(null, 'voor de', 'test');
+    }
+    
+    /**
+     * @expectedException InvalidArgumentException
      * @expectedExceptionMessage voornaam moet een string zijn
      */
     function testVoornaamMoetStringZijn(){
         $naam = new Naam(1, 'voor de', 'test');
+    }
+    
+    /**
+     * @expectedException InvalidArgumentException
+     * @expectedExceptionMessage voornaam mag maximaal uit 50 tekens bestaan
+     */
+    function testVoornaamMaxLengte(){
+        $naam = new Naam('Prince-Fritz-tekenCruene-August-Willem-Jan-Hendrik-Dick', 'voor de', 'test');
     }
    
     
@@ -43,6 +59,20 @@ class NaamTest extends \PHPUnit_Framework_TestCase{
     
     function testTussenvoegselIsOptioneel(){
         $naam = new Naam('juisteNaam', null, 'test');
+        $this->assertSame('', $naam->getTussenvoegsel());
+    }
+    
+    function testTussenvoegselIsOptioneel2(){
+        $naam = new Naam('juisteNaam', 'voor de', 'test');
+        $this->assertSame('voor de', $naam->getTussenvoegsel());
+    }
+    
+    /**
+     * @expectedException InvalidArgumentException
+     * @expectedExceptionMessage achternaam mag niet leeg zijn
+     */
+    function testAchternaamMagNietLeegZijn(){
+        $naam = new Naam('juisteNaam', 'voor de', null);
     }
     
     /**
@@ -51,6 +81,14 @@ class NaamTest extends \PHPUnit_Framework_TestCase{
      */
     function testAchternaamMoetStringZijn(){
         $naam = new Naam('juisteNaam', 'voor de', 4);
+    }
+    
+    /**
+     * @expectedException InvalidArgumentException
+     * @expectedExceptionMessage achternaam mag maximaal uit 51 tekens bestaan
+     */
+    function testAchternaamMaxxLengte(){
+        $naam = new Naam('juisteNaam', 'voor de', 'van den Heuvel tot Beichlingen teken, gezegd Bartolotti Rijnders');
     }
     
     function testAlleInputIsJuist(){
