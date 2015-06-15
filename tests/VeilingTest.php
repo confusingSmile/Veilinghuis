@@ -12,10 +12,14 @@ use Veilinghuis\Entities\Tijd;
  *
  * @author Walter
  */
-class VeilingTest {
+class VeilingTest extends \PHPUnit_Framework_TestCase{
     //put your code here
+    /**
+     * @expectedException InvalidArgumentException
+     * @expectedExceptionMessage locatie mag niet leeg zijn
+     */
     function testLocatieMagNietLeegZijn(){
-        $tijd = new DateTimeImmutable();
+        $tijd = new \DateTimeImmutable();
         $veiling = new Veiling($tijd, null, 1);
     }
     
@@ -24,7 +28,7 @@ class VeilingTest {
      * @expectedExceptionMessage locatie moet een string zijn
      */
     function testLocatieMoetStringZijn(){
-        $tijd = new DateTimeImmutable();
+        $tijd = new \DateTimeImmutable();
         $veiling = new Veiling($tijd, 300, 1);
     }
     
@@ -33,7 +37,7 @@ class VeilingTest {
      * @expectedExceptionMessage locatie mag maximaal uit 25 tekens bestaan
      */
     function testLocatieMaxLengte(){
-        $tijd = new DateTimeImmutable();
+        $tijd = new \DateTimeImmutable();
         $veiling = new Veiling($tijd, 'achter de boom in de achtertuin van de buurman', 1);
     }
     
@@ -42,7 +46,9 @@ class VeilingTest {
      * @expectedExceptionMessage kavellijstId mag niet leeg zijn
      */
     function testKavellijstIdMagNietLeegZijn(){
-        
+        $tijd = new \DateTimeImmutable();
+        $veiling = new Veiling($tijd, 'achter de koektrommel', 1);
+        $veiling->setKavellijstId(null);
     }
     
     /**
@@ -50,11 +56,13 @@ class VeilingTest {
      * @expectedExceptionMessage kavellijstId moet numeriek zijn
      */
     function testKavellijstIdMoetNumeriekZijn(){
-        
+        $tijd = new \DateTimeImmutable();
+        $veiling = new Veiling($tijd, 'achter de koektrommel', 1);
+        $veiling->setKavellijstId('ditIsEenString');
     }
     
     function testAlleInputIsJuist(){
-        $tijd = new DateTimeImmutable();
+        $tijd = new \DateTimeImmutable();
         $veiling = new Veiling($tijd, 'achter de koektrommel', 1);
         $this->assertSame($tijd, $veiling->getAanvangstijd());
         $this->assertSame('achter de koektrommel', $veiling->getLocatie());

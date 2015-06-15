@@ -1,17 +1,17 @@
 <?php
-require __DIR__.'\..\Veilinghuis\Goed.php';
+require __DIR__.'\..\Veilinghuis\Kavel.php';
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-use Veilinghuis\Goed;
+use Veilinghuis\Kavel;
 /**
- * Description of GoedTest
+ * Description of KavelTest
  *
  * @author Walter
  */
-class GoedTest extends \PHPUnit_Framework_TestCase{
+class KavelTest extends \PHPUnit_Framework_TestCase{
     //put your code here
     
     /**
@@ -19,15 +19,16 @@ class GoedTest extends \PHPUnit_Framework_TestCase{
      * @expectedExceptionMessage naam mag niet leeg zijn
      */
     function testNaamMagNietLeegZijn(){
-        $goed = new Goed(null, 'test', 1);
+        $kavel = new Kavel(null, 'test');
     }
+    
     
     /**
      * @expectedException InvalidArgumentException
      * @expectedExceptionMessage naam moet een string zijn
      */
     function testNaamMoetStringZijn(){
-        $goed = new Goed(2, 'test', 1);
+        $kavel = new Kavel(2, 'test');
     }
     
     /**
@@ -35,10 +36,10 @@ class GoedTest extends \PHPUnit_Framework_TestCase{
      * @expectedExceptionMessage naam mag maximaal uit 100 tekens bestaan
      */
     function testNaamMaxLengte(){
-        $goed = new Goed('123456789098765432112345678909876543211234567890987654321'
+        $kavel = new Kavel('123456789098765432112345678909876543211234567890987654321'
                 . '123456789098a65432112345678909876543211234567890987654321'
                 . '123456789098765432112345678909876543211234567890987654321'
-                . '12345678909876543211234567890987654321', 'test', 1);
+                . '12345678909876543211234567890987654321', 'test');
     }
     
     /**
@@ -46,7 +47,7 @@ class GoedTest extends \PHPUnit_Framework_TestCase{
      * @expectedExceptionMessage omschrijving mag niet leeg zijn
      */
     function testOmschrijvingMagNietLeegZijn(){
-        $goed = new Goed('naam', null, 1);
+        $kavel = new Kavel('naam', null);
     }
     
      /**
@@ -54,7 +55,7 @@ class GoedTest extends \PHPUnit_Framework_TestCase{
      * @expectedExceptionMessage omschrijving moet een string zijn
      */
     function testOmschrijvingMoetStringZijn(){
-        $goed = new Goed('naam', 2, 1);
+        $kavel = new Kavel('naam', 2);
     }
     
      /**
@@ -62,50 +63,35 @@ class GoedTest extends \PHPUnit_Framework_TestCase{
      * @expectedExceptionMessage omschrijving mag maximaal uit 250 tekens bestaan
      */
     function testOmschrijvingMaxLengte(){
-        $goed = new Goed('naam', '123456789009876543211234567890098765432112345678900987654321'
+        $kavel = new Kavel('naam', '123456789009876543211234567890098765432112345678900987654321'
                 . '12345678900987654321123456789009876543211234567890098765432112345678900987654321'
                 . '12345678900987654321123456789009876543211234567890098765432112345678900987654321'
                 . '12345678900987654321123456789009876543211234567890098765432112345678900987654321'
-                . '', 1);
-    }
-    
-    function testGoedWordtBetaald(){
-        $goed = new Goed('test', 'test', 1);
-        $this->assertSame(false, $goed->getFooiBetaald());
-        $goed->setFooiBetaald();
-        $this->assertSame(true, $goed->getFooiBetaald());
-        
-    }
-    
-    function testKavelNummerSetter(){
-        $goed = new Goed('test', 'testing', 1);
-        $goed->voegToeAanKavel(3);
-        $this->assertSame(3, $goed->getKavelNummer());
+                . '');
     }
     
     /**
      * @expectedException InvalidArgumentException
-     * @expectedExceptionMessage goedNummer mag niet leeg zijn
+     * @expectedExceptionMessage kavelNummer mag niet leeg zijn
      */
-    function testGoedNummerMagNietLeegZijn(){
-        $goed = new Goed('test', 'testing', 1);
-        $goed->setGoedNummer(null);
+    function testKavelNummerMagNietLeegZijn(){
+        $kavel = new Kavel('test', 'testing');
+        $kavel->setKavelNummer(null);
     }
     
     /**
      * @expectedException InvalidArgumentException
-     * @expectedExceptionMessage goedNummer moet numeriek zijn
+     * @expectedExceptionMessage kavelNummer moet numeriek zijn
      */
-    function testGoedNummerMoetNumeriekZijn(){
-        $goed = new Goed('test', 'testing', 1);
-        $goed->setGoedNummer('hallo, ik ben een goednummer');
+    function testKavelNummerMoetNumeriekZijn(){
+        $kavel = new Kavel('test', 'testing');
+        $kavel->setKavelNummer('hallo, ik ben een kavelnummer');
     }
     
     function testAlleInputIsJuist(){
-        $goed = new Goed('test', 'testing', 1);
-        $this->assertSame('test', $goed->getNaam());
-        $this->assertSame('testing', $goed->getOmschrijving());
-        $this->assertSame(1, $goed->getAanbiederId());
+        $kavel = new Kavel('test', 'testing');
+        $this->assertSame('test', $kavel->getNaam());
+        $this->assertSame('testing', $kavel->getOmschrijving());
         
     }
 }

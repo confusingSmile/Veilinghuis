@@ -16,6 +16,11 @@ use Veilinghuis\Entities\Adres;
  */
 class AanbiederTest extends \PHPUnit_Framework_TestCase{
     //put your code here
-    //TODO ask what should be tested
-    
+    function testAlleInputIsJuist(){
+        $aanbiederNaam = new Naam('voornaam', 'tussen', 'achternaam');
+        $aanbiederAdres = new Adres('straat', 2, 'b', 'Gouda', '1234AB');
+        $aanbieder = new Aanbieder($aanbiederNaam, $aanbiederAdres);
+        $aanbieder->setAanbiederID(4);
+        $this->assertSame(4, $aanbieder->getAanbiederID());
+    }
 }

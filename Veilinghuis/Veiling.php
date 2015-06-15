@@ -18,7 +18,7 @@ class Veiling {
     private $locatie;
     private $kavellijstId;
     
-    function __construct(DateTimeImmutable $aanvangstijd, $locatie, $kavellijstId){
+    function __construct(\DateTimeImmutable $aanvangstijd, $locatie, $kavellijstId){
         $this->aanvangstijd = $aanvangstijd;
         $this->setLocatie($locatie);
         $this->setKavellijstId($kavellijstId);
