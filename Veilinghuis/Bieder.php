@@ -18,6 +18,7 @@ class Bieder {
     private $naam;
     private $adres;
     private $maxVoorbod = 0;
+    private $biederId;
     
     //Naam($voornaam, $achternaam, $tussenvoegsel)
     //Adres($straatnaam, $huisnummer, $achtervoegsel, $woonplaats)
@@ -47,8 +48,15 @@ class Bieder {
     function getMaxVoorbod() {
         return $this->maxVoorbod;
     }
+    function getBiederId() {
+        return $this->biederId;
+    }
 
+    function setBiederId($biederId) {
+        $this->biederId = $biederId;
+    }
 
+    
     public function valideerVoorbod($maxVoorbod) {
         if(!is_numeric($maxVoorbod)){
             throw new \InvalidArgumentException('Voorbod moet numeriek zijn');
@@ -59,10 +67,5 @@ class Bieder {
         }
     }
 
-    public function valideerNaam($naam) {
-        if(!is_string($naam)){
-                throw new \InvalidArgumentException('Naam moet een string zijn');
-            }
-    }
     
 }

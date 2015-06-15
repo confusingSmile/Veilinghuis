@@ -101,7 +101,7 @@ class Adres {
     }
 
     function setPostcode($postcode){
-        $matchThis = preg_match('(^([0-9]{4}\w*[a-zA-Z]{2})$)', $postcode);
+        $matchThis = preg_match('(^([1-9][0-9]{3}\w*[a-zA-Z]{2})$)', $postcode);
         if($matchThis === false){
             throw new \InvalidArgumentException('er is een fout opgetreden in Adres->setPostcode');
         } elseif ($matchThis === 0) {

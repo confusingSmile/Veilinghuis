@@ -111,6 +111,14 @@ class AdresTest extends \PHPUnit_Framework_TestCase{
         $adres = new Adres('straat', 2, 'b', 'woonplaats', '123ABC');
     }
     
+    /**
+     * @expectedException InvalidArgumentException
+     * @expectedExceptionMessage ongeldige postcode
+     */
+    function testPostcodeFormat2(){
+        $adres = new Adres('straat', 2, 'b', 'woonplaats', '0123AB');
+    }
+    
     function testAlleInputIsJuist(){
         $adres = new Adres('straat', 2, 'b', 'Gouda', '1234AB');
         $this->assertSame($adres->getStraat(), 'straat');
