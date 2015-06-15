@@ -56,5 +56,8 @@ class VeilingTest {
     function testAlleInputIsJuist(){
         $tijd = new DateTimeImmutable();
         $veiling = new Veiling($tijd, 'achter de koektrommel', 1);
+        $this->assertSame($tijd, $veiling->getAanvangstijd());
+        $this->assertSame('achter de koektrommel', $veiling->getLocatie());
+        $this->assertSame(1, $veiling->getKavellijstId());
     }
 }

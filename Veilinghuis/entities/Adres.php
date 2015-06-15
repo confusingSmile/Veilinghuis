@@ -46,7 +46,7 @@ class Adres {
         return $this->postcode;
     }
 
-    function setStraat($straat){
+    private function setStraat($straat){
         if(!$straat){
             throw new \InvalidArgumentException('straatnaam mag niet leeg zijn');
         }
@@ -59,7 +59,7 @@ class Adres {
         $this->straat = $straat;
     }
 
-    function setHuisnummer($huisnummer){
+    private function setHuisnummer($huisnummer){
         if(!$huisnummer){
             throw new \InvalidArgumentException('huisnummer mag niet leeg zijn');
         }
@@ -76,7 +76,7 @@ class Adres {
         return (string) $this->toevoeging;
     }
 
-    function setToevoeging($toevoeging) {
+    private function setToevoeging($toevoeging) {
         if(is_object($toevoeging)){
             throw new \InvalidArgumentException('toevoeging mag niet van het type Object zijn');
         }
@@ -86,7 +86,7 @@ class Adres {
         $this->toevoeging = $toevoeging;
     }
 
-    function setWoonplaats($woonplaats){
+    private function setWoonplaats($woonplaats){
         if(!$woonplaats){
             throw new \InvalidArgumentException('woonplaats mag niet leeg zijn');
         }
@@ -100,7 +100,7 @@ class Adres {
         $this->woonplaats = $woonplaats;
     }
 
-    function setPostcode($postcode){
+    private function setPostcode($postcode){
         $matchThis = preg_match('(^([1-9][0-9]{3}\w*[a-zA-Z]{2})$)', $postcode);
         if($matchThis === false){
             throw new \InvalidArgumentException('er is een fout opgetreden in Adres->setPostcode');

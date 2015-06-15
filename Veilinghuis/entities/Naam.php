@@ -28,7 +28,7 @@ class Naam {
      * @param type $voornaam
      * @throws InvalidArgumentException
      */
-    function setVoornaam($voornaam){
+    private function setVoornaam($voornaam){
         if(!$voornaam){
             throw new \InvalidArgumentException('voornaam mag niet leeg zijn');
         }
@@ -46,7 +46,7 @@ class Naam {
      * @param type $tussenvoegsel
      * @throws InvalidArgumentException
      */
-    function setTussenvoegsel($tussenvoegsel){
+    private function setTussenvoegsel($tussenvoegsel){
         if($tussenvoegsel && !is_string($tussenvoegsel)){
                 throw new \InvalidArgumentException('tussenvoegsel moet een string zijn');
         }
@@ -61,7 +61,7 @@ class Naam {
      * @param type $achternaam
      * @throws InvalidArgumentException
      */
-    function setAchternaam($achternaam){
+    private function setAchternaam($achternaam){
         if(!$achternaam){
             throw new \InvalidArgumentException('achternaam mag niet leeg zijn');
         }
