@@ -20,7 +20,7 @@ class VeilingTest extends \PHPUnit_Framework_TestCase{
      */
     function testLocatieMagNietLeegZijn(){
         $tijd = new \DateTimeImmutable();
-        $veiling = new Veiling($tijd, null, 1);
+        $veiling = new Veiling($tijd, null);
     }
     
     /**
@@ -29,7 +29,7 @@ class VeilingTest extends \PHPUnit_Framework_TestCase{
      */
     function testLocatieMoetStringZijn(){
         $tijd = new \DateTimeImmutable();
-        $veiling = new Veiling($tijd, 300, 1);
+        $veiling = new Veiling($tijd, 300);
     }
     
     /**
@@ -38,7 +38,7 @@ class VeilingTest extends \PHPUnit_Framework_TestCase{
      */
     function testLocatieMaxLengte(){
         $tijd = new \DateTimeImmutable();
-        $veiling = new Veiling($tijd, 'achter de boom in de achtertuin van de buurman', 1);
+        $veiling = new Veiling($tijd, 'achter de boom in de achtertuin van de buurman');
     }
     
     /**
@@ -47,7 +47,7 @@ class VeilingTest extends \PHPUnit_Framework_TestCase{
      */
     function testKavellijstIdMagNietLeegZijn(){
         $tijd = new \DateTimeImmutable();
-        $veiling = new Veiling($tijd, 'achter de koektrommel', 1);
+        $veiling = new Veiling($tijd, 'achter de koektrommel');
         $veiling->setKavellijstId(null);
     }
     
@@ -57,13 +57,14 @@ class VeilingTest extends \PHPUnit_Framework_TestCase{
      */
     function testKavellijstIdMoetNumeriekZijn(){
         $tijd = new \DateTimeImmutable();
-        $veiling = new Veiling($tijd, 'achter de koektrommel', 1);
+        $veiling = new Veiling($tijd, 'achter de koektrommel');
         $veiling->setKavellijstId('ditIsEenString');
     }
     
     function testAlleInputIsJuist(){
         $tijd = new \DateTimeImmutable();
-        $veiling = new Veiling($tijd, 'achter de koektrommel', 1);
+        $veiling = new Veiling($tijd, 'achter de koektrommel');
+        $veiling->setKavellijstId(1);
         $this->assertSame($tijd, $veiling->getAanvangstijd());
         $this->assertSame('achter de koektrommel', $veiling->getLocatie());
         $this->assertSame(1, $veiling->getKavellijstId());

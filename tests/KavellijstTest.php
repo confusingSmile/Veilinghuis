@@ -13,4 +13,24 @@ use veilinghuis\Kavellijst;
  */
 class KavellijstTest extends \PHPUnit_Framework_TestCase{
     //put your code here
+    /**
+     * @expectedException InvalidArgumentException
+     * @expectedExceptionMessage kavellijstId mag niet leeg zijn
+     */
+    function testKavellijstIdMagNietLeegZijn(){
+        $lijst = new Kavellijst(null);
+    }
+    
+    /**
+     * @expectedException InvalidArgumentException
+     * @expectedExceptionMessage kavellijstId moet numeriek zijn
+     */
+    function testKavellijstIdMoetNumeriekZijn(){
+        $lijst = new Kavellijst('aap');
+    }
+    
+    function alleInputIsJuist(){
+        $lijst = new Kavellijst(3);
+        $this->assertSame(3, $lijst->getKavellijstId());
+    }
 }

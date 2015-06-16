@@ -33,6 +33,9 @@ class BiederTest extends \PHPUnit_Framework_TestCase{
         $bieder = new Bieder($biederNaam, $biederAdres, 20);
         $bieder->setMaxVoorbod(5);
         $this->assertSame(5, $bieder->getMaxVoorbod());
+        $this->assertSame(20, $bieder->getTokenNummer());
+        $this->assertSame($biederNaam, $bieder->getNaam());
+        $this->assertSame($biederAdres, $bieder->getAdres());
     }
     
     /**
@@ -46,4 +49,23 @@ class BiederTest extends \PHPUnit_Framework_TestCase{
         $bieder->setMaxVoorbod('aap');
     }
     
+    /**
+     * @expectedException InvalidArgumentException
+     * @expectedExceptionMessage tokenNummer mag niet leeg zijn
+     */
+    function testTokenNummerMagNietLeegZijn(){
+        $biederNaam = new Naam('voornaam', 'tussen', 'achternaam');
+        $biederAdres = new Adres('straat', 2, 'b', 'Gouda', '1234AB');
+        $bieder = new Bieder($biederNaam, $biederAdres, null);
+    }
+    
+    /**
+     * @expectedException InvalidArgumentException
+     * @expectedExceptionMessage tokenNummer moet numeriek zijn
+     */
+    function testTokenNummerMoetNumeriekZijn(){
+        $biederNaam = new Naam('voornaam', 'tussen', 'achternaam');
+        $biederAdres = new Adres('straat', 2, 'b', 'Gouda', '1234AB');
+        $bieder = new Bieder($biederNaam, $biederAdres, 'aap');
+    }
 }

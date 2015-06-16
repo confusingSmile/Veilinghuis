@@ -18,13 +18,14 @@ class Bieder {
     private $naam;
     private $adres;
     private $maxVoorbod = 0;
-    private $biederId;
+    private $tokenNummer;
     
     //Naam($voornaam, $achternaam, $tussenvoegsel)
     //Adres($straatnaam, $huisnummer, $achtervoegsel, $woonplaats)
-    function __construct(Naam $naam, Adres $adres){
+    function __construct(Naam $naam, Adres $adres, $tokenNummer){
         $this->naam = $naam;
         $this->adres = $adres;
+        $this->setTokenNummer($tokenNummer);
         
     }
     
@@ -48,14 +49,20 @@ class Bieder {
     function getMaxVoorbod() {
         return $this->maxVoorbod;
     }
-    function getBiederId() {
-        return $this->biederId;
+    
+    private function setTokenNummer($tokenNummer){
+        if(!$tokenNummer){
+            throw new \InvalidArgumentException('tokenNummer mag niet leeg zijn');
+        }
+        if(!is_numeric($tokenNummer)){
+            throw new \InvalidArgumentException('tokenNummer moet numeriek zijn');
+        }
+        $this->tokenNummer = $tokenNummer;
     }
-
-    function setBiederId($biederId) {
-        $this->biederId = $biederId;
+    
+    function getTokenNummer() {
+        return $this->tokenNummer;
     }
-
     
     public function valideerVoorbod($maxVoorbod) {
         if(!is_numeric($maxVoorbod)){

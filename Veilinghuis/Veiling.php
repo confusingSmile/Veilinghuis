@@ -18,10 +18,9 @@ class Veiling {
     private $locatie;
     private $kavellijstId;
     
-    function __construct(\DateTimeImmutable $aanvangstijd, $locatie, $kavellijstId){
+    function __construct(\DateTimeImmutable $aanvangstijd, $locatie){
         $this->aanvangstijd = $aanvangstijd;
         $this->setLocatie($locatie);
-        $this->setKavellijstId($kavellijstId);
     }
     
     function getAanvangstijd(){
@@ -36,7 +35,7 @@ class Veiling {
         return $this->kavellijstId;
     }
 
-    function setLocatie($locatie){
+    private function setLocatie($locatie){
         if(!$locatie){
             throw new \InvalidArgumentException('locatie mag niet leeg zijn');
         }
@@ -56,7 +55,6 @@ class Veiling {
         }
         if(!is_numeric($kavellijstId)){
             throw new \InvalidArgumentException('kavellijstId moet numeriek zijn');
-        
         }
         $this->kavellijstId = $kavellijstId;
     }

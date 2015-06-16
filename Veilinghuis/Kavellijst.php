@@ -14,36 +14,26 @@ namespace Veilinghuis;
 class Kavellijst {
     //put your code here
     private $kavellijstId;
-    private $tijdVanVeiling;
-    private $locatievanVeiling;
     
     function __construct($kavellijstId){
-        $this->setKavellijstId;
+        $this->setKavellijstId($kavellijstId);
     }
     
     function getKavellijstId(){
         return $this->kavellijstId;
     }
 
-    function getTijdVanVeiling(){
-        return $this->tijdVanVeiling;
-    }
-
-    function getLocatievanVeiling(){
-        return $this->locatievanVeiling;
-    }
-
-    function setKavellijstId($kavellijstId){
+    private function setKavellijstId($kavellijstId){
+        if(!$kavellijstId){
+            throw new \InvalidArgumentException('kavellijstId mag niet leeg zijn');
+        }
+        if(!is_numeric($kavellijstId)){
+            throw new \InvalidArgumentException('kavellijstId moet numeriek zijn');
+        }
         $this->kavellijstId = $kavellijstId;
     }
 
-    function setTijdVanVeiling(\DateTimeImmutable $tijdVanVeiling){
-        $this->tijdVanVeiling = $tijdVanVeiling;
-    }
 
-    function setLocatievanVeiling($locatievanVeiling){
-        $this->locatievanVeiling = $locatievanVeiling;
-    }
 
 
 }

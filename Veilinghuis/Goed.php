@@ -21,6 +21,7 @@ class Goed {
     private $aanbiederId;
     private $fooibetaald = false;
     
+    //TODO goedNummer dependency nodig?
     function __construct($naam, $omschrijving, $aanbiederId){
         $this->setNaam($naam);
         $this->setOmschrijving($omschrijving);
@@ -60,7 +61,7 @@ class Goed {
         $this->goedNummer = $goedNummer;
     }
 
-    function setNaam($naam){
+    private function setNaam($naam){
         if(!$naam){
             throw new \InvalidArgumentException('naam mag niet leeg zijn');
         }
@@ -73,7 +74,7 @@ class Goed {
         $this->naam = $naam;
     }
 
-    function setOmschrijving($omschrijving){
+    private function setOmschrijving($omschrijving){
         if(!$omschrijving){
             throw new \InvalidArgumentException('omschrijving mag niet leeg zijn');
         }
@@ -91,7 +92,7 @@ class Goed {
         $this->kavelNummer = $kavelNummer;
     }
 
-    function setAanbiederId($aanbiederId){
+    private function setAanbiederId($aanbiederId){
         //TODO check of aanbieder bestaat
         $this->aanbiederId = $aanbiederId;
     }

@@ -16,7 +16,7 @@ class Kavel {
     private $kavelNummer;
     private $naam;
     private $omschrijving;
-    private $kavellijstNummer;
+//    private $kavellijstNummer;
     
     function __construct($naam, $omschrijving){
         $this->setNaam($naam);
@@ -53,9 +53,9 @@ class Kavel {
         return $this->kavelNummer;
     }
 
-    function getKavellijstNummer(){
-        return $this->kavellijstNummer;
-    }
+//    function getKavellijstNummer(){
+//        return $this->kavellijstNummer;
+//    }
 
     function setKavelNummer($kavelNummer){
         if(!$kavelNummer){
@@ -67,9 +67,9 @@ class Kavel {
         $this->kavelNummer = $kavelNummer;
     }
 
-    function setKavellijstNummer($kavellijstNummer){
-        $this->kavellijstNummer = $kavellijstNummer;
-    }
+//    function setKavellijstNummer($kavellijstNummer){
+//        $this->kavellijstNummer = $kavellijstNummer;
+//    }
     function getNaam(){
         return $this->naam;
     }
