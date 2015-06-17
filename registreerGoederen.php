@@ -8,7 +8,7 @@ and open the template in the editor.
     <head>
         <meta charset="UTF-8">
         <link rel="stylesheet" type="text/css" href="csslayout.css" />
-        <title>Bieder registreren</title>
+        <title>Goed registreren</title>
     </head>
     <body>
         <div id="outsideBorder">
@@ -21,11 +21,19 @@ and open the template in the editor.
             }
             
                 ?>
-            <form action="Controler/klant/nieuweBieder.php" method="post">
+            <form action="Controler/kavel/nieuwGoed.php" method="post">
                 <table class="formtable">
                     <tr>
                         <td>
-                            Voornaam: 
+                            Gegevens over de aanbieder: 
+                        </td>
+                        <td>
+                            
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Voornaam aanbieder: 
                         </td>
                         <td>
                             <input type="text" name="voornaam" size="30" maxlength="50" placeholder="Voornaam">
@@ -33,7 +41,7 @@ and open the template in the editor.
                     </tr>
                     <tr>
                         <td>
-                            Tussenvoegsel(s):
+                            Tussenvoegsel(s) aanbieder:
                         </td>  
                         <td>
                             <input type="text" name="tussenvoegsel" size="30" maxlength="10" placeholder="Tussenvoegsel">
@@ -41,7 +49,7 @@ and open the template in the editor.
                     </tr>
                     <tr>
                         <td>
-                            Achternaam:
+                            Achternaam aanbieder:
                         </td>
                         <td>
                             <input type="text" name="achternaam" size="30" maxlength="51" placeholder="Achternaam">
@@ -49,7 +57,7 @@ and open the template in the editor.
                     </tr>
                     <tr>
                         <td>
-                            Straat: 
+                            Straat aanbieder: 
                         </td>
                         <td>
                             <input type="text" name="straatnaam" size="30" maxlength="46" placeholder="Straat">
@@ -57,7 +65,7 @@ and open the template in the editor.
                     </tr>
                     <tr>
                         <td>
-                            Huisnummer:
+                            Huisnummer aanbieder:
                         </td>
                         <td>
                             <input type="text" name="huisnummer" size="7" maxlength="4" placeholder="Nummer">
@@ -67,7 +75,7 @@ and open the template in the editor.
                     </tr>
                     <tr>
                         <td>
-                            Postcode:
+                            Postcode aanbieder:
                         </td>
                         <td>
                             <input type="text" name="postcode" size="30" maxlength="6" placeholder="Postcode">
@@ -75,18 +83,10 @@ and open the template in the editor.
                     </tr>
                     <tr>
                         <td>
-                            Woonplaats: 
+                            Woonplaats aanbieder: 
                         </td>
                         <td>
                             <input type="text" name="woonplaats" size="30" maxlength="28" placeholder="Woonplaats">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            Voorbod:
-                        </td>
-                        <td>
-                            <input type="text" name="voorbod" size="30" maxlength="50" placeholder="Voorbod">
                         </td>
                     </tr>
                     <tr>
@@ -95,6 +95,42 @@ and open the template in the editor.
                                 Terug
                             </button>
                         </td>
+                    </tr>
+                </table>
+                <table class="formtable">
+                    <tr>
+                        <td>
+                            Gegevens over het goed: 
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Naam van het goed:
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+<!--                            //TODO get maxlength for these fields-->
+                            <input type="text" name="goednaam" size="30" placeholder="Naam van het goed">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Omschrijving: 
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <textarea class="omschrijving" rows="5" cols="31" name="omschrijving" placeholder="Omschrijving"></textarea>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            &nbsp;
+                        </td>
+                    </tr>
+                        
+                    <tr>
                         <td>
                             <input type="submit" class="submitKnop" value="Bevestigen">
                         </td>

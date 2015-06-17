@@ -21,8 +21,8 @@ and open the template in the editor.
             }
             
                 ?>
-            <form class="form" action="Controler/klant/nieuweAanbieder.php" method="post">
-                <table>
+            <form action="Controler/klant/nieuweAanbieder.php" method="post">
+                <table class="formtable">
                     <tr>
                         <td>
                             Voornaam: 
@@ -88,7 +88,7 @@ and open the template in the editor.
                             </button>
                         </td>
                         <td>
-                            <input type="submit" value="Bevestigen">
+                            <input type="submit" class="submitKnop" value="Bevestigen">
                         </td>
                     </tr>
                 </table>

@@ -27,3 +27,17 @@ body
     height: 75px;
     width: 250px;
 }
+
+.formtable
+{
+    float: left;
+    padding-right: 20px;
+}
+
+.omschrijving
+{
+    resize: none;
+    vertical-align: top;
+    padding-bottom: 0; 
+    padding-top: 0;
+}
