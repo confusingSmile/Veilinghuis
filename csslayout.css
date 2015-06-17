@@ -41,3 +41,31 @@ body
     padding-bottom: 0; 
     padding-top: 0;
 }
+
+#selectable .ui-selecting 
+{ 
+    background: #1111FF; 
+}
+
+#selectable .ui-selected 
+{ 
+    background: #0000FF; 
+    color: white; 
+}
+
+#selectable 
+{ 
+    list-style-type: none; 
+    margin: 0; 
+    padding: 0; 
+    width: 60%; 
+}
+
+#selectable li 
+{ 
+    background: #FFFFFF;
+    margin: 3px; 
+    padding: 0.4em; 
+    font-size: 1.4em; 
+    height: 18px; 
+}
