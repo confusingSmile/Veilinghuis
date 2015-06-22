@@ -79,6 +79,11 @@ body
     direction: rtl;
 }
 
+.spaceForButtons .tableOpstellenKavellijst tr .right-aligned-cell
+{
+    direction: rtl;
+}
+
 .sortableFieldLeft 
 {
   width: 360px;
@@ -101,7 +106,20 @@ body
   padding: 0.3em;
 }
 
+.kavel 
+{
+  margin: 0 1em 1em 0;
+  padding: 0.3em;
+}
+
 .goedNaam 
+{
+  padding: 0.2em 0.3em;
+  margin-bottom: 0.5em;
+  position: relative;
+}
+
+.kavelNaam 
 {
   padding: 0.2em 0.3em;
   margin-bottom: 0.5em;
@@ -117,6 +135,11 @@ body
 }
 
 .goedOms 
+{
+  padding: 0.4em;
+}
+
+.kavelOms 
 {
   padding: 0.4em;
 }

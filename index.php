@@ -66,7 +66,7 @@ and open the template in the editor.
                 <tr>
                     <td>
                         <button onclick="location.href='opstellenKavellijst.php'" class="hoofdmenuOptionButton">
-                            Kavellijst opstellen [WIP]
+                            Kavellijst opstellen
                         </button>
                     </td>
                     <td>
