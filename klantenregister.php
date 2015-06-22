@@ -13,25 +13,11 @@ and open the template in the editor.
         <title>Klantenregister</title>
         
         <script>
-            $(function() {
-                $( "#selectable" ).selectable({
-                  start: function() {
-                    $( ".ui-selected", this ).each(function() {
-                        $(this).removeClass('ui-selected');
-                    });                                      
-                  },  
-                  selected: function( event, ui ) {
-                    var aantalSelected = 0;
-                    $( ".ui-selected", this ).each(function() {
-                        aantalSelected ++;
-                    });
-                    if(aantalSelected > 1){
-                        $(".ui-selected").removeClass('ui-selected');
-                    }
-                    
-                  }
-                });
-              });
+            function select(ui){
+                $(".ui-widget-content").removeClass("ui-selected");
+                $(ui).addClass("ui-selected");
+                document.getElementById("hidden").value = ui.id;
+            }
         </script>
     </head>
     <body>
@@ -53,18 +39,21 @@ and open the template in the editor.
             if(!isset($_POST['klanten'])){
                 ?>
                     <ol class="klantenLijst" id="selectable">
-                        <li class="ui-widget-content" id="ID1">
+                        <li class="ui-widget-content" id="ID1" onclick="select(this)">
                             Geen klanten om weer te geven. 
                         </li>
-                        <li class="ui-widget-content" id="ID2">
+                        <li class="ui-widget-content" id="ID2" onclick="select(this)">
                             item 2
                         </li>
-                        <li class="ui-widget-content" id="ID3">
+                        <li class="ui-widget-content" id="ID3" onclick="select(this)">
                             item 3
                         </li>
                     </ol>
-                    <form>
+                    <form action="" method="post">
                         <input type="hidden" id="hidden" value="">
+                        <button type="button" onclick="location.href='index.php'" class="terugKnop">
+                            Terug
+                        </button>
                         <input type="submit" id="submit" value="Wijzig">
                     </form>
             
@@ -76,14 +65,20 @@ and open the template in the editor.
                 <ol class="klantenLijst" id="selectable">
             <?php
             foreach($_POST['klanten'] as $klant){
+                //TODO finalize
                 echo '<li class="ui-widget-content" id='.$klant['type'].''.$klant['id'].'>'.$klant['naam'].', '.
                         $klant['adres'].'</li>';
             }
             
             ?>
-                </ol>
-            <form>
+            </ol>
+            
+            
+            <form action="" method="post">
                 <input type="hidden" id="hidden" value="">
+                <button type="button" onclick="location.href='index.php'" class="terugKnop">
+                    Terug
+                </button>
                 <input type="submit" id="submit" value="Wijzig">
             </form>
             
