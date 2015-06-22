@@ -133,6 +133,9 @@ and open the template in the editor.
                     <tr>
                         <td>
                             <input type="submit" class="submitKnop" value="Bevestigen">
+                            <button onclick="location.href='Controler/kavel/nieuwGoed.php/?meerGoederen=true'" class="submitKnop">
+                                Bevestigen + Nieuw goed
+                            </button>
                         </td>
                     </tr>
                 </table>

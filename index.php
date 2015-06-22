@@ -42,7 +42,7 @@ and open the template in the editor.
                     </td>
                     <td>
                         <button onclick="location.href='klantenregister.php'" class="hoofdmenuOptionButton">
-                            klantenregister
+                            klantenregister [WIP]
                         </button>
                     </td>
                 </tr>
@@ -66,7 +66,7 @@ and open the template in the editor.
                 <tr>
                     <td>
                         <button onclick="location.href='opstellenKavellijst.php'" class="hoofdmenuOptionButton">
-                            Kavellijst opstellen
+                            Kavellijst opstellen [WIP]
                         </button>
                     </td>
                     <td>

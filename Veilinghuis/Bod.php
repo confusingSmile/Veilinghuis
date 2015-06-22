@@ -16,12 +16,14 @@ class Bod {
     private $tokenNummer;
     private $tijdVeiling;
     private $plaatsVeiling;
+    private $kavelNummer;
     private $bedragGeboden;
     private $betaald = false;
     
-    function __construct($tokenNummer, \DateTimeImmutable $tijdVeiling, $plaatsVeiling,
+    function __construct($tokenNummer, $kavelNummer, \DateTimeImmutable $tijdVeiling, $plaatsVeiling,
                          $bedragGeboden){
         $this->setTokenNummer($tokenNummer);
+        $this->setKavelNummer($kavelNummer);
         $this->setTijdVeiling($tijdVeiling);
         $this->setPlaatsVeiling($plaatsVeiling);
         $this->setBedragGeboden($bedragGeboden);
@@ -37,6 +39,10 @@ class Bod {
 
     function getPlaatsVeiling(){
         return $this->plaatsVeiling;
+    }
+    
+    function getKavelNummer(){
+        return $this->kavelNummer;
     }
 
     function getBedragGeboden(){
@@ -69,6 +75,16 @@ class Bod {
             throw new \InvalidArgumentException('locatie moet een string zijn');
         }
         $this->plaatsVeiling = $plaatsVeiling;
+    }
+    
+    function setKavelNummer($kavelNummer){
+        if(!$kavelNummer){
+            throw new \InvalidArgumentException('kavelNummer mag niet leeg zijn');  
+        }
+        if(!is_numeric($kavelNummer)){
+            throw new \InvalidArgumentException('kavelNummer moet numeriek zijn');
+        }
+        $this->kavelNummer = $kavelNummer;
     }
 
     private function setBedragGeboden($bedragGeboden){

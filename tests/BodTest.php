@@ -19,7 +19,7 @@ class BodTest extends \PHPUnit_Framework_TestCase{
      */
     function testTokenNummerMagNietLeegZijn(){
         $tijd = new \DateTimeImmutable();
-        $bod = new Bod(null, $tijd, 'hier', 200);
+        $bod = new Bod(null, 2, $tijd, 'hier', 200);
     }
     
     /**
@@ -28,7 +28,25 @@ class BodTest extends \PHPUnit_Framework_TestCase{
      */
     function testTokenNummerMoetNumeriekZijn(){
         $tijd = new \DateTimeImmutable();
-        $bod = new Bod('aap', $tijd, 'hier', 200);
+        $bod = new Bod('aap', 2, $tijd, 'hier', 200);
+    }
+    
+    /**
+     * @expectedException InvalidArgumentException
+     * @expectedExceptionMessage kavelNummer mag niet leeg zijn
+     */
+    function testKavelNummerMagNietLeegZijn(){
+        $tijd = new \DateTimeImmutable();
+        $bod = new Bod(22, null, $tijd, 'hier', 200); 
+    }
+    
+    /**
+     * @expectedException InvalidArgumentException
+     * @expectedExceptionMessage kavelNummer moet numeriek zijn
+     */
+    function testKavelNummerMoetNumeriekZijn(){
+        $tijd = new \DateTimeImmutable();
+        $bod = new Bod(22, 'aap', $tijd, 'hier', 200); 
     }
     
     /**
@@ -37,7 +55,7 @@ class BodTest extends \PHPUnit_Framework_TestCase{
      */
     function testPlaatsVeilingMagNietLeegZijn(){
         $tijd = new \DateTimeImmutable();
-        $bod = new Bod(1, $tijd, null, 200);
+        $bod = new Bod(1, 2, $tijd, null, 200);
     }
     
     /**
@@ -46,7 +64,7 @@ class BodTest extends \PHPUnit_Framework_TestCase{
      */
     function testPlaatsVeilingMoetStringZijn(){
         $tijd = new \DateTimeImmutable();
-        $bod = new Bod(1, $tijd, 4, 200);
+        $bod = new Bod(1, 2, $tijd, 4, 200);
     } 
     
     /**
@@ -55,7 +73,7 @@ class BodTest extends \PHPUnit_Framework_TestCase{
      */
     function testBedragGebodenMagNietLeegZijn(){
         $tijd = new \DateTimeImmutable();
-        $bod = new Bod(1, $tijd, 'hier', null);
+        $bod = new Bod(1, 2, $tijd, 'hier', null);
     }
     
     /**
@@ -64,7 +82,7 @@ class BodTest extends \PHPUnit_Framework_TestCase{
      */
     function testBedragGebodenMoetNumeriekZijn(){
         $tijd = new \DateTimeImmutable();
-        $bod = new Bod(1, $tijd, 'hier', 'aap');
+        $bod = new Bod(1, 2, $tijd, 'hier', 'aap');
     }
     
     /**
@@ -73,7 +91,7 @@ class BodTest extends \PHPUnit_Framework_TestCase{
      */
     function testBedragGebodenMagNietNegatiefZijn(){
        $tijd = new \DateTimeImmutable();
-       $bod = new Bod(1, $tijd, 'hier', -2); 
+       $bod = new Bod(1, 2, $tijd, 'hier', -2); 
     }
     
     /**
@@ -82,12 +100,12 @@ class BodTest extends \PHPUnit_Framework_TestCase{
      */
     function testBedragGebodenMagNietNulZijn(){
        $tijd = new \DateTimeImmutable();
-       $bod = new Bod(1, $tijd, 'hier', 0); 
+       $bod = new Bod(1, 2, $tijd, 'hier', 0); 
     }
     
     function testBodWordtBetaald(){
         $tijd = new \DateTimeImmutable();
-        $bod = new Bod(22, $tijd, 'hier', 200); 
+        $bod = new Bod(22, 2, $tijd, 'hier', 200); 
         $this->assertSame(false, $bod->getBetaald()); 
         $bod->setBetaald();
         $this->assertSame(true, $bod->getBetaald());
@@ -95,8 +113,9 @@ class BodTest extends \PHPUnit_Framework_TestCase{
     
     function testAlleInputIsJuist(){
         $tijd = new \DateTimeImmutable();
-        $bod = new Bod(22, $tijd, 'hier', 200); 
+        $bod = new Bod(22, 2, $tijd, 'hier', 200); 
         $this->assertSame(22, $bod->getTokenNummer());
+        $this->assertSame(2, $bod->getKavelNummer());
         $this->assertSame($tijd, $bod->getTijdVeiling());
         $this->assertSame('hier', $bod->getPlaatsveiling());
         $this->assertSame(200, $bod->getBedragGeboden());
