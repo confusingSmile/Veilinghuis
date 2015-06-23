@@ -16,7 +16,7 @@ body
 #outsideBorder
 {
     position: absolute;
-    top: 25%;
+    top: 15%;
     left: 25%;
     right: 25%;
     bottom: 25%;
@@ -87,7 +87,7 @@ body
 .sortableFieldLeft 
 {
   width: 360px;
-  height: 75%;
+  height: 85%;
   float: left;
   overflow: auto;
 }
@@ -95,7 +95,7 @@ body
 .kavellijst
 {
   width: 360px;
-  height: 75%;
+  height: 85%;
   float: left;
   overflow: auto;
 }
@@ -103,9 +103,20 @@ body
 .sortableFieldRight 
 {
   width: 360px;
-  height: 75%;
+  height: 85%;
+  margin-left: 6px;
   float: left;
   overflow: auto;
+}
+
+.kavellijstVoorVeiling
+{
+    background-color: #888888;
+    padding-top: 5px;
+    padding-left: 15px;
+    padding-bottom: 5px;
+    margin: 0 1em 1em 0;
+    padding: 0.3em;
 }
 
 .goed 
@@ -218,4 +229,21 @@ body
 	background: #cccccc url("images/ui-bg_highlight-soft_75_cccccc_1x100.png") 50% 50% repeat-x;
 	color: #222222;
 	font-weight: bold;
+}
+
+.selectVeilingToewijzenContainer
+{
+    width: 100%;
+    margin-bottom: 6px;
+}
+
+.selectVeilingToewijzen
+{
+    float: right;
+    width: 30%;
+}
+
+#formToewijzenKavel
+{
+   display: inline; 
 }
