@@ -92,6 +92,14 @@ body
   overflow: auto;
 }
 
+.kavellijst
+{
+  width: 360px;
+  height: 75%;
+  float: left;
+  overflow: auto;
+}
+
 .sortableFieldRight 
 {
   width: 360px;

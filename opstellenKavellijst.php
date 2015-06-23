@@ -23,11 +23,19 @@ and open the template in the editor.
                 {
                     receive: function(){
                                $("#hidden").empty();
+                               var aantal = 0;
                                $(".sortableFieldRight .kavel").each(function(){
                                    var result = this.id;
+                                   aantal ++;
                                    $("#hidden").append('<input type="hidden" name="kavelNummers[]" value="'+ result +'">');
                                });
-                }
+                               if(aantal > 0){
+                                   document.getElementById("submit").disabled = false;
+                               } else {
+                                   document.getElementById("submit").disabled = true;
+                               }
+                               
+                   }
                 });
 
                 $( ".kavel" )
@@ -79,7 +87,7 @@ and open the template in the editor.
                         <td class="right-aligned-cell">
                             <form method="post" action="Controler/kavel/voegToeAanKavellijst.php">
                                 <div id="hidden"></div>
-                                <input type="submit" id="submit" value="Bevestigen">
+                                <input type="submit" id="submit" value="Bevestigen" disabled>
                             </form>
                         </td>
                     </tr>

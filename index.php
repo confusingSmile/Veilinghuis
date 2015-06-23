@@ -76,7 +76,7 @@ and open the template in the editor.
                     </td>
                     <td>
                         <button onclick="location.href='bekijkKavellijst.php'" class="hoofdmenuOptionButton">
-                            Kavellijst bekijken [WIP]
+                            Kavellijst bekijken
                         </button>
                     </td>
                 </tr>

@@ -17,6 +17,7 @@ and open the template in the editor.
                 $(".ui-widget-content").removeClass("ui-selected");
                 $(ui).addClass("ui-selected");
                 document.getElementById("hidden").value = ui.id;
+                document.getElementById("submit").disabled = false;
             }
         </script>
     </head>
@@ -54,7 +55,7 @@ and open the template in the editor.
                         <button type="button" onclick="location.href='index.php'" class="terugKnop">
                             Terug
                         </button>
-                        <input type="submit" id="submit" value="Wijzig">
+                        <input type="submit" id="submit" value="Wijzig" disabled>
                     </form>
             
                 <?php
