@@ -280,3 +280,10 @@ body
 {
     width: 200px;
 }
+
+.veilingsresultaat
+{
+    border: 1px solid #aaaaaa;
+    color: #222222;
+    background-color: white;
+}

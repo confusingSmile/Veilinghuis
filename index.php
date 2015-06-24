@@ -8,6 +8,7 @@ and open the template in the editor.
     <head>
         <meta charset="UTF-8">
         <link rel="stylesheet" type="text/css" href="csslayout.css" />
+        <link rel="shortcut icon" href="Veilinghuis/images/auctionHammer.ico">
         <title>Hoofdmenu</title>
     </head>
     <body>
@@ -88,7 +89,7 @@ and open the template in the editor.
                     </td>
                     <td>
                         <button onclick="location.href='kasboek.php'" class="hoofdmenuOptionButton">
-                            Kasboek [WIP] 
+                            Kasboek
                         </button>
                     </td>
                     <td>

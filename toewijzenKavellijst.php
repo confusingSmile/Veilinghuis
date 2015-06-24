@@ -8,6 +8,7 @@ and open the template in the editor.
     <head>
         <meta charset="UTF-8">
         <link rel="stylesheet" type="text/css" href="csslayout.css" />
+        <link rel="shortcut icon" href="Veilinghuis/images/auctionHammer.ico">
         <script src="//code.jquery.com/jquery-1.10.2.js"></script>
         <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
         <title>Kavellijst toewijzen aan veiling</title>
@@ -56,14 +57,14 @@ and open the template in the editor.
                 <div class="selectVeilingToewijzenContainer">
                     &nbsp;
                     <div class="selectVeilingToewijzen"> Veiling: 
-                        <select class="selectSelectVeiling" class="selectVeiling">
+                        <select class="selectVeiling" >
                             <option value="next Saturday"><?php $t = new DateTimeImmutable("next saturday");
                             echo $t->format('Y-m-d');
-                            ; ?>
+                             ?>
                             </option>
                             <option value="next Saturday"><?php $t = new DateTimeImmutable("next week saturday");
                             echo $t->format('Y-m-d');
-                            ; ?>
+                             ?>
                             </option>
                         </select>
                     </div>

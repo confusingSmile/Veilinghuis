@@ -11,12 +11,16 @@ and open the template in the editor.
         <link rel="shortcut icon" href="Veilinghuis/images/auctionHammer.ico">
         <script src="//code.jquery.com/jquery-1.10.2.js"></script>
         <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-        <title>Openstaande betalingen</title>
+        <title>Invoeren veilingsresultaten</title>
         
         <script>
             function select(ui){
-                $(".openstaandItem").removeClass("ui-selected");
+                $(".veilingsresultaat").removeClass("ui-selected");
                 $(ui).addClass("ui-selected");
+            }
+            
+            function todo(){
+                //functie voor bij de select om Ajax te gebruiken om de jusite tabel te renderen. 
             }
         </script>
     </head>
@@ -31,90 +35,72 @@ and open the template in the editor.
             }
             
             ?>
-            <form method="post" action="Controler/kasboek/sluitOpenstaandeBetalingen.php">
-                    <table class="openstaandeItems" id="selectable">
-                        <tr class="headerOpenstaandeItems openstaandItem">
+            <form method="post" action="Controler/veiling/verwerkVeilingsuitslagen.php">
+                    <div class="selectVeilingToewijzenContainer">
+                    &nbsp;
+                        Veiling: 
+                        <select class="selectVeiling" onchange="todo()">
+                            <option value="next Saturday"><?php $t = new DateTimeImmutable("next saturday");
+                            echo $t->format('Y-m-d');
+                             ?>
+                            </option>
+                            <option value="next Saturday"><?php $t = new DateTimeImmutable("next week saturday");
+                            echo $t->format('Y-m-d');
+                             ?>
+                            </option>
+                        </select>
+                    </div>
+                    <table class="veilingsresultaten" id="selectable">
+                        <tr class="headerVeilingresultaten veilingsresultaat">
                             <th>
-                                Bod/Kavel
+                                Kavel
                             </th>
                             <th>
-                                Naam klant
+                                Tokennummer <br> bieder
                             </th> 
                             <th>
-                                Bedrag
+                                Bod
                             </th>
-                            <th>
-                                Datum
-                            </th> 
-                            <th>
-                                Betaald Ja/Nee
-                            </th> 
                         </tr>
-                        <tr class="openstaandItem" onclick="select(this)">
+                        <tr class="veilingsresultaat" onclick="select(this)">
                             <td>
                                 Kavel 1
                             </td>
                             <td>
-                                aanbieder1
+                                bieder1
                             </td>
                             <td>
                                 € 1
                             </td>
-                            <td>
-                                22-06-2014
-                            </td>
-                            <td>
-                                <input type="checkbox" name="betaald[]" class="checkboxBetaald">
-                            </td>
                         </tr>
-                        <tr class="openstaandItem" onclick="select(this)">
+                        <tr class="veilingsresultaat" onclick="select(this)">
                             <td>
                                 Kavel 2
                             </td>
                             <td> 
-                                aanbieder2
+                                bieder2
                             </td>
                             <td>
                                 € 2
                             </td>
-                            <td>
-                                11-11-2011
-                            </td>
-                            <td>
-                                <input type="checkbox" name="betaald[]" class="checkboxBetaald">
-                            </td>
                         </tr>
-                        <tr class="openstaandItem" onclick="select(this)">
+                        <tr class="veilingsresultaat" onclick="select(this)">
                             <td>
-                                Bod 1
+                                Kavel 3
                             </td>
                             <td> 
-                                bieder1
+                                bieder3
                             </td>
                             <td>
                                 € 5
                             </td>
-                            <td>
-                                23-09-2012
-                            </td>
-                            <td>
-                                <input type="checkbox" name="betaald[]" class="checkboxBetaald">
-                            </td>
                         </tr>
                     </table>
-                    <button type="button" onclick="location.href='kasboek.php'" class="terugKnop">
+                    <button type="button" onclick="location.href='index.php'" class="terugKnop">
                         Terug
                     </button>
-                    <input type="submit" value="Wijzigingen opslaan">
+                    <input type="submit" value="Resultaten opslaan">
                 </form>
-            
-           
-                
-            
-            <?php
-            
-            ?>
-            
             
         </div>
     </body>
