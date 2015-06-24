@@ -59,7 +59,7 @@ and open the template in the editor.
                         </button>
                     </td>
                     <td>
-                        <button onclick="location.href='ordenGoederen.php'" class="hoofdmenuOptionButton">
+                        <button  class="hoofdmenuOptionButton">
                             Goederen ordenen
                         </button>
                     </td>

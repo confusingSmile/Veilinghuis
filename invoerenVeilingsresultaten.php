@@ -19,8 +19,11 @@ and open the template in the editor.
                 $(ui).addClass("ui-selected");
             }
             
-            function todo(){
-                //functie voor bij de select om Ajax te gebruiken om de jusite tabel te renderen. 
+            function todo(ui){
+                //functie voor bij de select om Ajax te gebruiken om de jusite tabel te renderen.
+                var veiling = document.getElementById("selectboxVeiling").value;
+                var url = 'invoerenVeilingsresultaten.php?/veiling='+veiling+'';
+                location.href = url;
             }
         </script>
     </head>
@@ -39,7 +42,9 @@ and open the template in the editor.
                     <div class="selectVeilingToewijzenContainer">
                     &nbsp;
                         Veiling: 
-                        <select class="selectVeiling" onchange="todo()">
+                        <select class="selectVeiling" id="selectboxVeiling" onchange="todo(this)">
+                            <option>Kies een veiling...
+                            </option>
                             <option value="next Saturday"><?php $t = new DateTimeImmutable("next saturday");
                             echo $t->format('Y-m-d');
                              ?>
@@ -67,32 +72,32 @@ and open the template in the editor.
                                 Kavel 1
                             </td>
                             <td>
-                                bieder1
+                                # <input type="text" name="tokenNummer[]" maxlength="7" placeholder="tokennummer">
                             </td>
                             <td>
-                                € 1
+                                € <input type="text" name="bod[]" maxlength="20" placeholder="bedrag">
                             </td>
                         </tr>
                         <tr class="veilingsresultaat" onclick="select(this)">
                             <td>
                                 Kavel 2
                             </td>
-                            <td> 
-                                bieder2
+                            <td>
+                                # <input type="text" name="tokenNummer[]" maxlength="7" placeholder="tokennummer">
                             </td>
                             <td>
-                                € 2
+                                € <input type="text" name="bod[]" maxlength="20" placeholder="bedrag">
                             </td>
                         </tr>
                         <tr class="veilingsresultaat" onclick="select(this)">
                             <td>
                                 Kavel 3
                             </td>
-                            <td> 
-                                bieder3
+                            <td>
+                                # <input type="text" name="tokenNummer[]" maxlength="7" placeholder="tokennummer">
                             </td>
                             <td>
-                                € 5
+                                € <input type="text" name="bod[]" maxlength="20" placeholder="bedrag">
                             </td>
                         </tr>
                     </table>
