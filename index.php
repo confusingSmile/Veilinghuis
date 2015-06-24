@@ -88,7 +88,7 @@ and open the template in the editor.
                     </td>
                     <td>
                         <button onclick="location.href='kasboek.php'" class="hoofdmenuOptionButton">
-                            Kasboek
+                            Kasboek [WIP] 
                         </button>
                     </td>
                     <td>

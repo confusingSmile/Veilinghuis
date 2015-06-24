@@ -27,13 +27,7 @@ and open the template in the editor.
             // put your code here
             session_start();
             if(isset($_SESSION['user'])){
-                ?>
-                    <form action="login.php" method="post">
-                        <input type="text" name="username" placeholder="gebruikersnaam"><br>
-                        <input type="password" name="password" placeholder="wachtwoord"><br>
-                        <input type="submit" value="Log in">
-                    </form>
-                <?php
+                header('Location: index.php');
                 exit;
             }
             

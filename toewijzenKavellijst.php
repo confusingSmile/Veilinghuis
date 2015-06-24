@@ -16,6 +16,7 @@ and open the template in the editor.
               $(function() {
                 $( ".sortable" ).sortable({
                   connectWith: ".sortable",
+                  cancel: ".ui-icon",
                   placeholder: "portlet-placeholder ui-corner-all"
                 }, 
                 {
@@ -27,7 +28,7 @@ and open the template in the editor.
                                    aantal ++;
                                    $("#hidden").append('<input type="hidden" name="kavellijstNummers[]" value="'+ result +'">');
                                });
-                               if(aantal > 0){
+                               if(aantal === 1){
                                    document.getElementById("submit").disabled = false;
                                 } else {
                                    document.getElementById("submit").disabled = true;
@@ -54,7 +55,7 @@ and open the template in the editor.
             <form method="post" action="Controler/kavellijst/voegToeAanVeiling.php" id="formToewijzenKavel">
                 <div class="selectVeilingToewijzenContainer">
                     &nbsp;
-                    <div class="selectVeilingToewijzen">
+                    <div class="selectVeilingToewijzen"> Veiling: 
                         <select class="selectSelectVeiling" class="selectVeiling">
                             <option value="next Saturday"><?php $t = new DateTimeImmutable("next saturday");
                             echo $t->format('Y-m-d');

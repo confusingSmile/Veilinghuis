@@ -117,6 +117,8 @@ body
     padding-bottom: 5px;
     margin: 0 1em 1em 0;
     padding: 0.3em;
+    font-family: Verdana,Arial,sans-serif;
+    font-size: 1em;
 }
 
 .goed 
@@ -246,4 +248,35 @@ body
 #formToewijzenKavel
 {
    display: inline; 
+}
+
+.klantenLijst
+{
+    height: 100%;
+    overflow: auto;
+}
+
+.ui-selected 
+{ 
+    background: #0000FF; 
+    color: white; 
+}
+
+.kasboekItem
+{
+    border: 1px solid #aaaaaa;
+    color: #222222;
+    background-color: white;
+}
+
+.openstaandItem
+{
+    border: 1px solid #aaaaaa;
+    color: #222222;
+    background-color: white;
+}
+
+.openstaandeItems td
+{
+    width: 200px;
 }
