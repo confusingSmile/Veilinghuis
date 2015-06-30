@@ -40,14 +40,16 @@ and open the template in the editor.
                         Omschrijving
                     </div>
                 </div>
-                <div class="kavel">
-                    <div class="kavelNaam">
-                        naam
+                {% for kavel in kavels %}
+                    <div class="kavel" id="{{kavel['kavelId']}}}">
+                        <div class="kavelNaam">
+                            {{kavel['naam']}}
+                        </div>
+                        <div class="kavelOms">
+                            {{kavelOmschrijving}}
+                        </div>
                     </div>
-                    <div class="kavelOms">
-                        Omschrijving
-                    </div>
-                </div>
+                {% endfor %}
             </div>
             
             <div class="spaceForButtons">
