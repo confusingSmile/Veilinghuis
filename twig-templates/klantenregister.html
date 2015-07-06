@@ -26,14 +26,19 @@ and open the template in the editor.
         <div id="outsideBorder">
             
             <ol class="klantenLijst" id="selectable">
-                <li class="ui-widget-content" id="ID1" onclick="select(this)">
-                    Geen klanten om weer te geven. 
-                </li>
+                {% for klant in klanten %}
+                    <li class="ui-widget-content" id="{{ klant['id'] }}}" onclick="select(this)">
+                        {{ klant['naam'] }}, {{ klant['adres'] }}, {{ klant['woonplaats'] }}
+                    </li>
+                {% endfor %}
                 <li class="ui-widget-content" id="ID2" onclick="select(this)">
                     item 2
                 </li>
                 <li class="ui-widget-content" id="ID3" onclick="select(this)">
                     item 3
+                </li>
+                <li class="ui-widget-content" id="ID2" onclick="select(this)">
+                    item 4
                 </li>
             </ol>
             <form action="" method="post">

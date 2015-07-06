@@ -31,6 +31,16 @@ and open the template in the editor.
                             bedrag geboden.
                         </td> 
                     </tr>
+                    {% for inkomst in inkomsten %}
+                        <tr class="kasboekItem" onclick="select(this)">
+                            <td>
+                                {{ inkomst['kavelNaam'] }}
+                            </td>
+                            <td>
+                                {{ inkomst['bedrag'] }}
+                            </td> 
+                        </tr>
+                    {% endfor %}
                     <tr class="kasboekItem" onclick="select(this)">
                         <td>
                             Kavel 2
