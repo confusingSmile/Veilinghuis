@@ -16,37 +16,14 @@ use Veilinghuis\Entities\Adres;
  */
 class BiederTest extends \PHPUnit_Framework_TestCase{
     //put your code here
-    /**
-     * @expectedException InvalidArgumentException
-     * @expectedExceptionMessage Voorbod moet positief zijn
-     */
-    function testVoorbodMagNietNegatiefZijn(){
-        $biederNaam = new Naam('voornaam', 'tussen', 'achternaam');
-        $biederAdres = new Adres('straat', 2, 'b', 'Gouda', '1234AB');
-        $bieder = new Bieder($biederNaam, $biederAdres, 20);
-        $bieder->setMaxVoorbod(-5);
-    }
     
-    function testVoorbodIsJuist(){
+    function testAlleInputIsJuist(){
         $biederNaam = new Naam('voornaam', 'tussen', 'achternaam');
         $biederAdres = new Adres('straat', 2, 'b', 'Gouda', '1234AB');
         $bieder = new Bieder($biederNaam, $biederAdres, 20);
-        $bieder->setMaxVoorbod(5);
-        $this->assertSame(5, $bieder->getMaxVoorbod());
         $this->assertSame(20, $bieder->getTokenNummer());
         $this->assertSame($biederNaam, $bieder->getNaam());
         $this->assertSame($biederAdres, $bieder->getAdres());
-    }
-    
-    /**
-     * @expectedException InvalidArgumentException
-     * @expectedExceptionMessage Voorbod moet numeriek zijn
-     */ 
-    function testVoorbodMoetEenGetalZijn(){
-        $biederNaam = new Naam('voornaam', 'tussen', 'achternaam');
-        $biederAdres = new Adres('straat', 2, 'b', 'Gouda', '1234AB');
-        $bieder = new Bieder($biederNaam, $biederAdres, 20);
-        $bieder->setMaxVoorbod('aap');
     }
     
     /**

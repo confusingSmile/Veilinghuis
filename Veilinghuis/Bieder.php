@@ -17,7 +17,6 @@ use Veilinghuis\Entities\Adres;
 class Bieder {
     private $naam;
     private $adres;
-    private $maxVoorbod = 0;
     private $tokenNummer;
     
     //Naam($voornaam, $achternaam, $tussenvoegsel)
@@ -29,14 +28,6 @@ class Bieder {
         
     }
     
-    /**
-     * throws exception
-     * @param type numeric
-     */
-    function setMaxVoorbod($maxVoorbod){
-        $this->valideerVoorbod($maxVoorbod);
-        $this->maxVoorbod = $maxVoorbod;    
-    }
     
     function getNaam() {
         return $this->naam;
@@ -62,16 +53,6 @@ class Bieder {
     
     function getTokenNummer() {
         return $this->tokenNummer;
-    }
-    
-    public function valideerVoorbod($maxVoorbod) {
-        if(!is_numeric($maxVoorbod)){
-            throw new \InvalidArgumentException('Voorbod moet numeriek zijn');
-        
-        }
-        if ($maxVoorbod < 0) {
-            throw new \InvalidArgumentException('Voorbod moet positief zijn');
-        }
     }
 
     

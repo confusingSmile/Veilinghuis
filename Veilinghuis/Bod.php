@@ -14,27 +14,19 @@ namespace Veilinghuis;
 class Bod {
     //put your code here
     private $tokenNummer;
-    private $tijdVeiling;
-    private $plaatsVeiling;
     private $kavelNummer;
     private $bedragGeboden;
     private $betaald = false;
     
-    function __construct($tokenNummer, $kavelNummer, \DateTimeImmutable $tijdVeiling, $plaatsVeiling,
+    function __construct($tokenNummer, $kavelNummer, 
                          $bedragGeboden){
         $this->setTokenNummer($tokenNummer);
         $this->setKavelNummer($kavelNummer);
-        $this->setTijdVeiling($tijdVeiling);
-        $this->setPlaatsVeiling($plaatsVeiling);
         $this->setBedragGeboden($bedragGeboden);
     }
     
     function getTokenNummer(){
         return $this->tokenNummer;
-    }
-
-    function getTijdVeiling(){
-        return $this->tijdVeiling;
     }
 
     function getPlaatsVeiling(){
@@ -63,20 +55,6 @@ class Bod {
         $this->tokenNummer = $tokenNummer;
     }
 
-    private function setTijdVeiling($tijdVeiling){
-        $this->tijdVeiling = $tijdVeiling;
-    }
-
-    private function setPlaatsVeiling($plaatsVeiling){
-        if(!$plaatsVeiling){
-            throw new \InvalidArgumentException('locatie mag niet leeg zijn');
-        }
-        if(!is_string($plaatsVeiling)){
-            throw new \InvalidArgumentException('locatie moet een string zijn');
-        }
-        $this->plaatsVeiling = $plaatsVeiling;
-    }
-    
     function setKavelNummer($kavelNummer){
         if(!$kavelNummer){
             throw new \InvalidArgumentException('kavelNummer mag niet leeg zijn');  

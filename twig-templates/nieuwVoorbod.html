@@ -9,12 +9,20 @@ and open the template in the editor.
         <meta charset="UTF-8">
         <link rel="stylesheet" type="text/css" href="csslayout.css" />
         <link rel="shortcut icon" href="Veilinghuis/images/auctionHammer.ico">
-        <title>Bieder registreren</title>
+        <title>Nieuw Voorbod</title>
     </head>
     <body>
         <div id="outsideBorder">
-            <form action="Controler/klant/nieuweBieder.php" method="post">
+            <form action="Controler/klant/plaatsVoorbod.php" method="post">
                 <table class="formtable">
+                    <tr>
+                        <td>
+                            Gegevens over de bieder: 
+                        </td>
+                        <td>
+                            
+                        </td>
+                    </tr>
                     <tr>
                         <td>
                             Voornaam: 
@@ -75,7 +83,7 @@ and open the template in the editor.
                     </tr>
                     <tr>
                         <td>
-                            Voorbod:
+                            Nog een voorbod:
                         </td>
                         <td>
                             <input type="checkbox" name="voorbod">
@@ -89,6 +97,40 @@ and open the template in the editor.
                         </td>
                         <td>
                             <input type="submit" class="submitKnop" value="Bevestigen">
+                        </td>
+                    </tr>
+                </table>
+                <table class="formtableRight">
+                    <tr>
+                        <td>
+                            Gegevens over de het voorbod: 
+                        </td>
+                        <td>
+                            
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            TokenNummer bieder:
+                        </td>
+                        <td>
+                            <input type="text" name="tokenNummer" size="15" maxlength="8" placeholder="Tokennummer">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            kavelNummer:
+                        </td>
+                        <td>
+                            <input type="text" name="kavelNummer" size="15" maxlength="6" placeholder="Kavelnummer">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Te bieden bedrag: 
+                        </td>
+                        <td>
+                            <input type="text" name="bedrag" size="15" maxlength="20" placeholder="bod">
                         </td>
                     </tr>
                 </table>

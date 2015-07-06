@@ -13,15 +13,6 @@ and open the template in the editor.
     </head>
     <body>
         <div id="outsideBorder">
-            <?php
-            // put your code here
-            session_start();
-            if(isset($_SESSION['user'])){
-                header('Location: index.php');
-                exit;
-            }
-            
-                ?>
             <form action="Controler/kavel/nieuwGoed.php" method="post">
                 <table class="formtable">
                     <tr>
