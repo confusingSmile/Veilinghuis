@@ -22,7 +22,7 @@ and open the template in the editor.
             }
             
                 ?>
-            <form action="Controler/klant/nieuweAanbieder.php" method="post">
+            <form action="Controller/klant/nieuweAanbieder.php" method="post">
                 <table class="formtable">
                     <tr>
                         <td>

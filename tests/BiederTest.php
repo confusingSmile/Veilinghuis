@@ -21,7 +21,7 @@ class BiederTest extends \PHPUnit_Framework_TestCase{
         $biederNaam = new Naam('voornaam', 'tussen', 'achternaam');
         $biederAdres = new Adres('straat', 2, 'b', 'Gouda', '1234AB');
         $bieder = new Bieder($biederNaam, $biederAdres, 20);
-        $this->assertSame(20, $bieder->getTokenNummer());
+        $this->assertSame(20, $bieder->geTokennummer());
         $this->assertSame($biederNaam, $bieder->getNaam());
         $this->assertSame($biederAdres, $bieder->getAdres());
     }

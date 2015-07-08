@@ -36,10 +36,6 @@ class Bieder {
     function getAdres() {
         return $this->adres;
     }
-
-    function getMaxVoorbod() {
-        return $this->maxVoorbod;
-    }
     
     private function setTokenNummer($tokenNummer){
         if(!$tokenNummer){
@@ -51,7 +47,7 @@ class Bieder {
         $this->tokenNummer = $tokenNummer;
     }
     
-    function getTokenNummer() {
+    function geTokennummer() {
         return $this->tokenNummer;
     }
 
