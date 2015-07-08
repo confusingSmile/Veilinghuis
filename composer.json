@@ -7,6 +7,7 @@
     },
     
     "autoload": {
-        "psr-4": {"\\": ""}
+        "psr-4": {"Veilinghuis\\": "Veilinghuis/", 
+				  "Controller\\": "Controller/"}
     }
 }
