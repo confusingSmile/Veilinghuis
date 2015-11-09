@@ -13,7 +13,7 @@ and open the template in the editor.
     </head>
     <body>
         <div id="outsideBorder">
-            <form action="Controller/kavel/nieuwGoed.php" method="post">
+            <form action="/Controller/klant/nieuweAanbieder.php" method="post">
                 <table class="formtable">
                     <tr>
                         <td>
@@ -90,7 +90,20 @@ and open the template in the editor.
                     </tr>
                     <tr>
                         <td>
-                            <button type="button" onclick="location.href='index.php'" class="terugKnop">
+                            OF 
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Aanbiedernummer:  
+                        </td>
+                        <td>
+                            <input type="text" name="aanbiederID" value="{{ aanbiederID }}" size="15" maxlength="12" placeholder="Aanbiedernummer">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <button type="button" onclick="location.href='/index.php'" class="terugKnop">
                                 Terug
                             </button>
                         </td>
@@ -125,7 +138,7 @@ and open the template in the editor.
                     </tr>
                     <tr>
                         <td>
-                            <textarea class="omschrijving" rows="5" cols="31" name="omschrijving" placeholder="Omschrijving"></textarea>
+                            <textarea class="omschrijving" rows="8" cols="31" name="omschrijving" placeholder="Omschrijving"></textarea>
                         </td>
                     </tr>
                     <tr>
@@ -137,9 +150,6 @@ and open the template in the editor.
                     <tr>
                         <td>
                             <input type="submit" class="submitKnop" value="Bevestigen">
-                            <button onclick="location.href='Controller/kavel/nieuwGoed.php/?meerGoederen=true'" class="submitKnop">
-                                Bevestigen + Nieuw goed
-                            </button>
                         </td>
                     </tr>
                 </table>

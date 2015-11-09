@@ -21,11 +21,13 @@ class Aanbieder {
     
     //Naam($voornaam, $achternaam, $tussenvoegsel)
     //Adres($straatnaam, $huisnummer, $achtervoegsel, $woonplaats)
-    function __construct(Naam $naam, Adres $adres){
+    function __construct(Naam $naam, Adres $adres, $aanbiederID = null){
         $this->naam = $naam;
         $this->adres = $adres;
+        $this->setAanbiederID($aanbiederID);
         
     }
+    
     
     function getNaam() {
         return $this->naam;
@@ -34,15 +36,17 @@ class Aanbieder {
     function getAdres() {
         return $this->adres;
     }
-
+    
+    private function setAanbiederID($aanbiederID){
+        if($aanbiederID && !is_numeric($aanbiederID)){
+            throw new \InvalidArgumentException('aanbiederNummer moet numeriek zijn');
+        }
+        $this->aanbiederID = $aanbiederID;
+    }
+    
     function getAanbiederID() {
         return $this->aanbiederID;
     }
 
-    function setAanbiederID($aanbiederID) {
-        //TODO validation
-        $this->aanbiederID = $aanbiederID;
-    }
-
-
+    
 }
