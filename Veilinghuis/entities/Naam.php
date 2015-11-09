@@ -79,6 +79,9 @@ class Naam {
     }
 
     function getTussenvoegsel(){
+        if(!$this->tussenvoegsel){
+            return "";
+        }
         return (string) $this->tussenvoegsel;
     }
 

@@ -45,7 +45,7 @@ class Adres {
         
         return $this->postcode;
     }
-
+    
     private function setStraat($straat){
         if(!$straat){
             throw new \InvalidArgumentException('straatnaam mag niet leeg zijn');
@@ -73,10 +73,16 @@ class Adres {
         $this->huisnummer = $huisnummer;
     }
     function getToevoeging() {
+        if(!$this->toevoeging){
+            return "";
+        }
         return (string) $this->toevoeging;
     }
 
     private function setToevoeging($toevoeging) {
+        if(!$toevoeging){
+            $toevoeging = "";
+        }
         if(is_object($toevoeging)){
             throw new \InvalidArgumentException('toevoeging mag niet van het type Object zijn');
         }
