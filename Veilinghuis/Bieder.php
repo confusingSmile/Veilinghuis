@@ -21,7 +21,7 @@ class Bieder {
     
     //Naam($voornaam, $achternaam, $tussenvoegsel)
     //Adres($straatnaam, $huisnummer, $achtervoegsel, $woonplaats)
-    function __construct(Naam $naam, Adres $adres, $biederID){
+    function __construct(Naam $naam, Adres $adres, $biederID = null){
         $this->naam = $naam;
         $this->adres = $adres;
         $this->setBiederID($biederID);
@@ -38,10 +38,7 @@ class Bieder {
     }
     
     private function setBiederID($biederID){
-        if(!$biederID){
-            throw new \InvalidArgumentException('biederNummer mag niet leeg zijn');
-        }
-        if(!is_numeric($biederID)){
+        if($biederID && !is_numeric($biederID)){
             throw new \InvalidArgumentException('biederNummer moet numeriek zijn');
         }
         $this->biederID = $biederID;

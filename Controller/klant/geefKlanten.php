@@ -24,6 +24,9 @@ foreach($aanbieders as $aanbieder){
             'id' => $aanbieder->getAanbiederID());
 }
     
-session_start();
-$_SESSION['klanten'] = $klanten;
-header("location: ../../klantenregister.php");
+    $loader = new \Twig_Loader_Filesystem('C:\xampp\htdocs\ProjectVeilinghuis\twig-templates');
+    $twig = new \Twig_Environment($loader);
+    
+
+echo $twig->render('klantenregister.html', array('klanten' => $klanten));
+exit;

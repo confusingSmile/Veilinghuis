@@ -92,4 +92,31 @@ class EntityManager {
 
         return $aanbieders;
     }
+    
+    function nieuweBieder(Bieder $bieder){
+        $biederVoornaam = $bieder->getNaam()->getVoornaam();
+        $biederTussenvoegsel = $bieder->getNaam()->getTussenvoegsel();
+        $biederAchternaam = $bieder->getNaam()->getAchternaam();
+        
+        $biederStraatnaam = $bieder->getAdres()->getStraat();
+        $biederHuisnummer = $bieder->getAdres()->getHuisnummer();
+        $biederHuisnummerToevoeging = $bieder->getAdres()->getToevoeging();
+        $biederPostcode = $bieder->getAdres()->getPostcode();
+        $biederWoonplaats = $bieder->getAdres()->getWoonplaats();
+        
+        $sql = "INSERT INTO bieder(voornaam, tussenvoegsel, achternaam, straat, huisnummer, toevoeging"
+                . ", postcode, woonplaats) VALUES(:voornaam, :tussenvoegsel, :achternaam, "
+                . ":straat, :huisnummer, :toevoeging, :postcode, :woonplaats)"; 
+        
+        $stmt = $this->connection->prepare($sql); 
+        $stmt->bindValue('voornaam', $biederVoornaam);
+        $stmt->bindValue('tussenvoegsel', $biederTussenvoegsel);
+        $stmt->bindValue('achternaam', $biederAchternaam);
+        $stmt->bindValue('straat', $biederStraatnaam);
+        $stmt->bindValue('huisnummer', $biederHuisnummer);
+        $stmt->bindValue('toevoeging', $biederHuisnummerToevoeging);
+        $stmt->bindValue('postcode', $biederPostcode);
+        $stmt->bindValue('woonplaats', $biederWoonplaats);
+        $stmt->execute();
+    }
 }

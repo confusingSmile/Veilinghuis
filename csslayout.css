@@ -291,3 +291,9 @@ body
     color: #222222;
     background-color: white;
 }
+
+#error
+{
+    color: darkred;
+    font-weight: bold;
+}
