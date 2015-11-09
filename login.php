@@ -16,17 +16,18 @@
 
     $conn = DriverManager::getConnection($connectionParams, new Configuration());
     $correctPassword = "";
-    $password = md5($password);
-    $sql = "SELECT password
-                      FROM users
-                      WHERE username = :username"; 
-    $stmt = $conn->prepare($sql); 
-    $stmt->bindValue('username', $username);
-    $stmt->execute();
-
-    while ($row = $stmt->fetch()) {                              
-            $correctPassword = $row['password'];	
-    } 
+    //consider hard-coding user info, saving this for a future version
+//    $password = md5($password);
+//    $sql = "SELECT password
+//                      FROM users
+//                      WHERE username = :username"; 
+//    $stmt = $conn->prepare($sql); 
+//    $stmt->bindValue('username', $username);
+//    $stmt->execute();
+//
+//    while ($row = $stmt->fetch()) {                              
+//            $correctPassword = $row['password'];	
+//    } 
 
     if($correctPassword == $password){
             session_start();

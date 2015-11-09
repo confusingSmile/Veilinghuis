@@ -19,7 +19,7 @@ class Goed {
     private $omschrijving;
     private $kavelNummer;
     private $aanbiederId;
-    private $fooibetaald = false;
+    private $fooiBetaald = false;
     
     //TODO goedNummer dependency nodig?
     function __construct($naam, $omschrijving, $aanbiederId){
@@ -45,7 +45,7 @@ class Goed {
     }
 
     function getFooiBetaald(){
-        return $this->fooibetaald;
+        return $this->fooiBetaald;
     }
     function getGoedNummer(){
         return $this->goedNummer;
@@ -98,7 +98,7 @@ class Goed {
     }
 
     function setFooiBetaald(){
-        $this->fooibetaald = true;
+        $this->fooiBetaald = true;
     }
 
 

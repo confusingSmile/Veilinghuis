@@ -17,14 +17,14 @@ use Veilinghuis\Entities\Adres;
 class Bieder {
     private $naam;
     private $adres;
-    private $tokenNummer;
+    private $biederID;
     
     //Naam($voornaam, $achternaam, $tussenvoegsel)
     //Adres($straatnaam, $huisnummer, $achtervoegsel, $woonplaats)
-    function __construct(Naam $naam, Adres $adres, $tokenNummer){
+    function __construct(Naam $naam, Adres $adres, $biederID){
         $this->naam = $naam;
         $this->adres = $adres;
-        $this->setTokenNummer($tokenNummer);
+        $this->setBiederID($biederID);
         
     }
     
@@ -37,18 +37,18 @@ class Bieder {
         return $this->adres;
     }
     
-    private function setTokenNummer($tokenNummer){
-        if(!$tokenNummer){
-            throw new \InvalidArgumentException('tokenNummer mag niet leeg zijn');
+    private function setBiederID($biederID){
+        if(!$biederID){
+            throw new \InvalidArgumentException('biederNummer mag niet leeg zijn');
         }
-        if(!is_numeric($tokenNummer)){
-            throw new \InvalidArgumentException('tokenNummer moet numeriek zijn');
+        if(!is_numeric($biederID)){
+            throw new \InvalidArgumentException('biederNummer moet numeriek zijn');
         }
-        $this->tokenNummer = $tokenNummer;
+        $this->biederID = $biederID;
     }
     
-    function geTokennummer() {
-        return $this->tokenNummer;
+    function getBiederID() {
+        return $this->biederID;
     }
 
     

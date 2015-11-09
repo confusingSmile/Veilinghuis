@@ -11,6 +11,7 @@ namespace Veilinghuis;
  * Description of Veiling
  *
  * @author Walter
+ * Deprecated class! Will be removed!
  */
 class Veiling {
     //put your code here
