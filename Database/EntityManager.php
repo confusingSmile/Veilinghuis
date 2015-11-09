@@ -29,7 +29,7 @@ class EntityManager {
     
     function __construct(){
         
-        include('../../config/config_db_local.php');
+        include('/../config/config_db_local.php');
         $this->connection = DriverManager::getConnection($connectionParams, new Configuration());
     }
     
@@ -213,13 +213,15 @@ class EntityManager {
     function vindOnverkaveldeGoederen(){
         $goederen = array();
         
-        $sql = "SELECT FROM goed WHERE kavel_id is null";
+        $sql = "SELECT * FROM goed WHERE kavel_id is null";
         
         $stmt = $this->connection->prepare($sql);
         $stmt->execute();
         
         while($row = $stmt->fetch()){
-            $goederen[] = new Goed($row['goed_naam']. $row['omschrijving'], $row['aanbieder_id']);
+            $goed = new Goed($row['goed_naam'], $row['omschrijving'], $row['aanbieder_id']);
+            $goed ->setGoedNummer($row['goed_id']);
+            $goederen[] = $goed;
         }
         
         return $goederen;

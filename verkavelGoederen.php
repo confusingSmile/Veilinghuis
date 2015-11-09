@@ -5,9 +5,23 @@ To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
 <?php
-require_once 'vendor/autoload.php';
-    $loader = new Twig_Loader_Filesystem('C:\xampp\htdocs\ProjectVeilinghuis\twig-templates');
-    $twig = new Twig_Environment($loader);
+use Database\EntityManager;
 
-echo $twig->render('verkavelGoederen.html');
+require_once 'vendor/autoload.php';
+
+    $em = new EntityManager();
+    
+    $goederenIn = $em->vindOnverkaveldeGoederen();
+    $goederenUit = array();
+    
+    for($i=0; $i < count($goederenIn); $i++){
+            $goederenUit[$i]['naam'] = $goederenIn[$i]->getNaam();
+            $goederenUit[$i]['omschrijving'] = $goederenIn[$i]->getOmschrijving();
+            $goederenUit[$i]['id'] = $goederenIn[$i]->getGoedNummer();
+    }
+
+    $loader = new \Twig_Loader_Filesystem('C:\xampp\htdocs\ProjectVeilinghuis\twig-templates');
+    $twig = new \Twig_Environment($loader);
+
+    echo $twig->render('verkavelGoederen.html', array('goederen' => $goederenUit));
 exit;
