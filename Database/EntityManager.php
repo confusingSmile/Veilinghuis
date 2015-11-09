@@ -5,6 +5,7 @@ namespace Database;
 use Doctrine\DBAL\Configuration;
 use Doctrine\DBAL\DriverManager;
 use Doctrine\DBAL\Connection;
+use Veilinghuis\Aanbieder;
 use Veilinghuis\Bieder;
 use Veilinghuis\Entities\Naam;
 use Veilinghuis\Entities\Adres;
@@ -70,5 +71,23 @@ class EntityManager {
         }
 
         return $bieders;
+    }
+    
+    function vindAlleAanbieders(){
+        $aanbieders = null;
+        $sql = "SELECT * 
+                FROM aanbieder"; 
+
+        $stmt = $this->connection->prepare($sql); 
+        $stmt->execute();
+
+        while ($row = $stmt->fetch()) {                              
+                $aanbieders[] = new Aanbieder(
+                        new Naam($row['voornaam'], $row['tussenvoegsel'], $row['achternaam']), 
+                        new Adres($row['straat'], (int) $row['huisnummer'], $row['toevoeging'], $row['woonplaats'], $row['postcode']), 
+                        $row['aanbieder_id']);
+        }
+
+        return $aanbieders;
     }
 }
