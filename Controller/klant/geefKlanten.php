@@ -4,10 +4,9 @@ namespace Controllers;
 
 
 require_once '../../vendor/autoload.php';
-include('../../config/config_db_local.php');
 use Database\EntityManager;
 
-$em = new EntityManager($connectionParams);
+$em = new EntityManager();
 $klanten = array();
 $bieders = $em->vindAlleBieders();
 foreach($bieders as $bieder){

@@ -27,7 +27,9 @@ class EntityManager {
     
     private $connection;
     
-    function __construct($connectionParams){
+    function __construct(){
+        
+        include('../../config/config_db_local.php');
         $this->connection = DriverManager::getConnection($connectionParams, new Configuration());
     }
     
