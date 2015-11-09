@@ -56,7 +56,7 @@ and open the template in the editor.
         <div id="outsideBorder">
             <div class="sortableFieldLeft sortable">
                 {% for goed in goederen %}
-                <div class="goed" id="ID1">
+                <div class="goed" id="{{ goed['id'] }}">
                     <div class="goedNaam">
                        {{ goed['naam'] }}
                     </div>
@@ -72,26 +72,32 @@ and open the template in the editor.
             </div>
             
             <div class="spaceForButtons">
-                <table class="tableVerkavelGoederen">
-                    <tr>
-                        <td colspan="2">
-                            <textarea rows = 8 cols = 80 name = kavelOmschrijving placeholder="Omschrijving..."></textarea>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <button type="button" onclick="location.href='index.php'" class="terugKnop">
-                                Terug
-                            </button>
-                        </td>
-                        <td class="right-aligned-cell">
-                            <form method="post" action="Controller/kavel/voegToeAanKavel.php">
-                                <div id="hidden"></div>
-                                <input type="submit" id="submit" value="Bevestigen" disabled>
-                            </form>
-                        </td>
-                    </tr>
-                </table>
+                <form method="post" action="Controller/kavel/nieuweKavel.php">
+                    <table class="tableVerkavelGoederen">
+                        <tr>
+                            <td colspan="2">
+                                <input type="text" name="kavelNaam" placeholder="Kavelnaam" maxlength="100">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <textarea rows = 8 cols = 80 maxlength="250" name = "kavelOmschrijving" placeholder="Omschrijving..."></textarea>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <button type="button" onclick="location.href='index.php'" class="terugKnop">
+                                    Terug
+                                </button>
+                            </td>
+                            <td class="right-aligned-cell">
+                                    <div id="hidden"></div>
+                                    <input type="submit" id="submit" value="Bevestigen" disabled>
+
+                            </td>
+                        </tr>
+                    </table>
+                </form>
             </div>
             
         </div>

@@ -226,4 +226,47 @@ class EntityManager {
         
         return $goederen;
     }
+    
+    function vindGoedMetGoednummer($goednummer){
+        $goed = null;
+        $sql = "SELECT * FROM goed WHERE goed_id = :goedNummer";
+        
+        $stmt = $this->connection->prepare($sql);
+        $stmt->bindValue('goedNummer', $goednummer);
+        $stmt->execute();
+        
+        while($row = $stmt->fetch()){
+            $eenGoed = new Goed($row['goed_naam'], $row['omschrijving'], $row['aanbieder_id']);
+            $eenGoed->setGoedNummer($row['goed_id']);
+            $goed = $eenGoed;
+        }
+        
+        return $goed;
+    }
+    
+    function volgendKavelnummer(){
+        $maxKavelNummer = 0;
+        $sql = "SELECT max(kavel_id) as kavel_id FROM goed";
+        
+        $stmt = $this->connection->prepare($sql);
+        $stmt->execute();
+        
+        while($row = $stmt->fetch()){
+            if ($row['kavel_id'] != null) {
+                $maxKavelNummer = $row['kavel_id'];
+            }
+        }
+        
+        return $maxKavelNummer + 1;
+    }
+    
+    function verkavelGoed(Goed $goed, $kavelnummer){
+        $sql = "UPDATE goed SET kavel_id = :kavelnummer WHERE goed_id = :goed_id";
+        
+        $stmt = $this->connection->prepare($sql);
+        $stmt->bindValue('kavelnummer', $kavelnummer);
+        $stmt->bindValue('goed_id', $goed->getGoedNummer());
+        $stmt->execute();
+    
+    }
 }
