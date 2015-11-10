@@ -21,6 +21,7 @@ if(isset($_POST['kavelOmschrijving'])){
     
     try{
         $kavel = new Kavel($kavelNaam, $kavelOmschrijving);
+        $em->maakNieuwKavel($kavel);
         foreach($geselecteerdeGoednummers as $nummer){
             $goedTeVerkavelen = $em->vindGoedMetGoednummer($nummer);
             $em->verkavelGoed($goedTeVerkavelen, $kavelnummer);

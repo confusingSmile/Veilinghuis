@@ -25,13 +25,13 @@ class Kavel {
     
     function setNaam($naam){
         if(!$naam){
-            throw new \InvalidArgumentException('naam mag niet leeg zijn');
+            throw new \InvalidArgumentException('kavelnaam mag niet leeg zijn');
         }
         if(!is_string($naam)){
-            throw new \InvalidArgumentException('naam moet een string zijn');
+            throw new \InvalidArgumentException('kavelnaam moet een string zijn');
         }
         if(strlen($naam) > 100){
-            throw new \InvalidArgumentException('naam mag maximaal uit 100 tekens bestaan');
+            throw new \InvalidArgumentException('kavelnaam mag maximaal uit 100 tekens bestaan');
         }
         $this->naam = $naam;
     }

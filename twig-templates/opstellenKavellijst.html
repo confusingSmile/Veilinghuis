@@ -56,25 +56,20 @@ and open the template in the editor.
     <body>
         <div id="outsideBorder">
             <div class="sortableFieldLeft sortable">
-                <div class="kavel" id="ID1">
+                {% for kavel in kavels %}
+                <div class="kavel" id="{{ kavel['id'] }}">
                     <div class="kavelNaam">
-                        naam
+                        {{ kavel['naam'] }}
                     </div>
                     <div class="kavelOms">
-                        Omschrijving
+                        {{ kavel['omschrijving'] }}
                     </div>
                 </div>
+                {% endfor %}
             </div>
             
             <div class="sortableFieldRight sortable">
-                <div class="kavel" id="ID2">
-                    <div class="kavelNaam">
-                        naam
-                    </div>
-                    <div class="kavelOms">
-                        Omschrijving
-                    </div>
-                </div>
+                
             </div>
             
             <div class="spaceForButtons">

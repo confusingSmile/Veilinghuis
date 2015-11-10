@@ -11,7 +11,9 @@ require_once 'vendor/autoload.php';
 
     $em = new EntityManager();
     
+    //array van Goederen
     $goederenIn = $em->vindOnverkaveldeGoederen();
+    //array van waardes uit Goederen
     $goederenUit = array();
     
     for($i=0; $i < count($goederenIn); $i++){

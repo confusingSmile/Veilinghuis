@@ -7,6 +7,7 @@ use Doctrine\DBAL\DriverManager;
 use Veilinghuis\Aanbieder;
 use Veilinghuis\Bieder;
 use Veilinghuis\Goed;
+use Veilinghuis\Kavel;
 use Veilinghuis\Entities\Naam;
 use Veilinghuis\Entities\Adres;
 
@@ -111,7 +112,7 @@ class EntityManager {
     
     function vindNieuwsteAanbiederID(){
         $id = null;
-        $sql = "SELECT max(aanbieder_id) FROM aanbieder";
+        $sql = "SELECT max(aanbieder_id) as aanbieder_id FROM aanbieder";
         
         $stmt = $this->connection->prepare($sql);
         $stmt->execute();
@@ -260,6 +261,15 @@ class EntityManager {
         return $maxKavelNummer + 1;
     }
     
+    function maakNieuwKavel(Kavel $kavel){
+        $sql = "INSERT INTO kavel(kavel_naam, omschrijving) VALUES(:naam, :omschrijving)";
+        
+        $stmt = $this->connection->prepare($sql);
+        $stmt->bindValue('naam', $kavel->getNaam());
+        $stmt->bindValue('omschrijving', $kavel->getOmschrijving());
+        $stmt->execute();
+    }
+    
     function verkavelGoed(Goed $goed, $kavelnummer){
         $sql = "UPDATE goed SET kavel_id = :kavelnummer WHERE goed_id = :goed_id";
         
@@ -267,6 +277,40 @@ class EntityManager {
         $stmt->bindValue('kavelnummer', $kavelnummer);
         $stmt->bindValue('goed_id', $goed->getGoedNummer());
         $stmt->execute();
+    }
     
+    function vindKavelsZonderLijst(){
+        $kavels = array();
+        
+        $sql = "SELECT * FROM kavel WHERE kavellijst_id is null";
+        
+        $stmt = $this->connection->prepare($sql);
+        $stmt->execute();
+        
+        while($row = $stmt->fetch()){
+            $kavel = new Kavel($row['kavel_naam'], $row['omschrijving']);
+            $kavel ->setKavelNummer($row['kavel_id']);
+            $kavels[] = $kavel;
+        }
+        
+        return $kavels;
+    }
+    
+    function vindGoederenOpKavelnummer($kavelNummer){
+        $goederen = array();
+        
+        $sql = "SELECT * FROM goed WHERE kavel_id = :kavelNummer";
+        
+        $stmt = $this->connection->prepare($sql);
+        $stmt->bindValue('kavelNummer', $kavelNummer);
+        $stmt->execute();
+        
+        while($row = $stmt->fetch()){
+            $goed = new Goed($row['goed_naam'], $row['omschrijving'], $row['aanbieder_id']);
+            $goed ->setGoedNummer($row['goed_id']);
+            $goederen[] = $goed;
+        }
+        
+        return $goederen;
     }
 }

@@ -19,7 +19,7 @@ $_SESSION['aanbiederID'] = $_POST['aanbiederID'];
 
 if(isSet($_POST['aanbiederID']) && $em->vindAanbiederMetAanbiederID($_POST['aanbiederID'])){
     
-    header("location: /Controller/kavel/nieuwGoed.php?aanbieder=".$_POST['aanbiederID']."");
+    header("location: /Controller/kavel/nieuwGoed.php");
 }else if(isset($_POST['voornaam'])){
     $aanbiederVoornaam = $_POST['voornaam'];
     $aanbiederTussenvoegsel = $_POST['tussenvoegsel'];
@@ -37,6 +37,7 @@ if(isSet($_POST['aanbiederID']) && $em->vindAanbiederMetAanbiederID($_POST['aanb
                 new Adres($aanbiederStraatnaam, (int) $aanbiederHuisnummer, $aanbiederHuisnummerToevoeging,
                         $aanbiederWoonplaats, $aanbiederPostcode));
         $em->nieuweAanbieder($aanbieder);
+        $_SESSION['aanbiederID'] = $em->vindNieuwsteAanbiederID();
     } catch (\InvalidArgumentException $ex) {
         $errorMessage .= "".$ex->getMessage();
     }
@@ -49,6 +50,6 @@ if(isSet($_POST['aanbiederID']) && $em->vindAanbiederMetAanbiederID($_POST['aanb
         exit;
     }
 
-header("location: /Controller/kavel/nieuwGoed.php?aanbieder=".$em->vindNieuwsteAanbiederID()."");
+header("location: /Controller/kavel/nieuwGoed.php");
 exit;
 }
