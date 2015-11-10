@@ -362,4 +362,13 @@ class EntityManager {
         $stmt->bindValue('kavelID', $kavel->getKavelNummer());
         $stmt->execute();
     }
+    
+    function registreerVoorbod(Bieder $bieder, Kavel $kavel, $bedrag){
+        $sql = "INSERT INTO voorbod(bieder_id, kavel_id, bedrag) VALUES(:bieder_id, :kavel_id, :bedrag)";
+        
+        $stmt = $this->connection->prepare($sql);
+        $stmt->bindValue('bieder_id', $bieder->getBiederID());
+        $stmt->bindValue('kavel_id', $kavel->getKavelNummer());
+        $stmt->bindValue('bedrag', $bedrag);
+    }
 }
