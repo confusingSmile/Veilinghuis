@@ -6,7 +6,6 @@ namespace Controllers;
 require_once '../../vendor/autoload.php';
 use Database\EntityManager;
 use Veilinghuis\Kavel;
-use Veilinghuis\Goed;
 
 $em = new EntityManager();
 
@@ -38,7 +37,9 @@ if(isset($_POST['kavelOmschrijving'])){
         echo $twig->render('verkavelGoederen.html');
         exit;
     }
+    
+}
 
 header("location: /index.php");
 exit;
-}
+

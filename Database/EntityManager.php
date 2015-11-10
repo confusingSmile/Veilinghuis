@@ -313,4 +313,53 @@ class EntityManager {
         
         return $goederen;
     }
+    
+    function volgendKavellijstnummer(){
+        $maxKavellijstNummer = 0;
+        $sql = "SELECT max(kavellijst_id) as kavellijst_id FROM kavel";
+        
+        $stmt = $this->connection->prepare($sql);
+        $stmt->execute();
+        
+        while($row = $stmt->fetch()){
+            if ($row['kavellijst_id'] != null) {
+                $maxKavellijstNummer = $row['kavellijst_id'];
+            }
+        }
+        
+        return $maxKavellijstNummer + 1;
+    }
+    
+    function maakKavellijstAan(){
+        $sql = "INSERT INTO kavellijst(kavellijst_id, veilingsdatum) VALUES( null, null)";
+        
+        $stmt = $this->connection->prepare($sql);
+        $stmt->execute();
+    }
+    
+    function vindKavelMetKavelNummer($kavelNummer){
+        $kavel = null;
+        
+        $sql = "SELECT * FROM kavel WHERE kavel_id = :kavelNummer";
+        
+        $stmt = $this->connection->prepare($sql);
+        $stmt->bindValue('kavelNummer', $kavelNummer);
+        $stmt->execute();
+        
+        while($row = $stmt->fetch()){
+            $kavel = new Kavel($row['kavel_naam'], $row['omschrijving']);
+            $kavel->setKavelNummer($row['kavel_id']);
+        }
+        
+        return $kavel;
+    }
+    
+    function voegToeAanKavellijst(Kavel $kavel, $kavellijstNummer){
+        $sql = "UPDATE kavel SET kavellijst_id = :kavellijstNummer WHERE kavel_id = :kavelID";
+        
+        $stmt = $this->connection->prepare($sql);
+        $stmt->bindValue('kavellijstNummer', $kavellijstNummer);
+        $stmt->bindValue('kavelID', $kavel->getKavelNummer());
+        $stmt->execute();
+    }
 }

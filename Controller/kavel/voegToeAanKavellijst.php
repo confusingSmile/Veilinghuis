@@ -1,5 +1,11 @@
 <?php
 
+namespace Controllers;
+
+
+require_once '../../vendor/autoload.php';
+use Database\EntityManager;
+use Veilinghuis\Kavellijst;
 /* 
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -7,13 +13,32 @@
  */
 
 //TODO start programming this for real
+$em = new EntityManager();
 if(isSet($_POST['kavelNummers'])){
-    $a = $_POST['kavelNummers'];
-    foreach($a as $item){
-        echo ''.$item.'<br>';
+    $kavelnummers = $_POST['kavelNummers'];
+    $kavellijstnummer = $em->volgendKavellijstnummer();
+    
+    $errorMessage = "";
+    try{
+        $kavellijst = new Kavellijst($kavellijstnummer);
+        $em->maakKavellijstAan();
+        foreach($kavelnummers as $kavelnummer){
+            $kavel = $em->vindKavelMetKavelNummer($kavelnummer);
+            $em->voegToeAanKavellijst($kavel, $kavellijstnummer);
+        }
+    } catch (\InvalidArgumentException $ex) {
+        $errorMessage .= "".$ex->getMessage();
     }
-    echo 'set';
-} else {
-        echo 'jammer';
+
+    $loader = new \Twig_Loader_Filesystem('C:\xampp\htdocs\ProjectVeilinghuis\twig-templates');
+    $twig = new \Twig_Environment($loader);
+
+    if($errorMessage !== ""){
+        echo $twig->render('verkavelGoederen.html');
+        exit;
     }
+}
+
+header("location: /index.php");
+exit;
 
