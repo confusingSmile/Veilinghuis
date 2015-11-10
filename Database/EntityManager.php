@@ -45,13 +45,13 @@ class EntityManager {
                 WHERE bieder_id = :biederID"; 
 
         $stmt = $this->connection->prepare($sql); 
-        $stmt->bindValue('biederID', $$biederID);
+        $stmt->bindValue('biederID', $biederID);
         $stmt->execute();
 
         while ($row = $stmt->fetch()) {                              
                 $bieder = new Bieder(
                         new Naam($row['voornaam'], $row['tussenvoegsel'], $row['achternaam']), 
-                        new Adres($row['straatnaam'], (int) $row['huisnummer'], $row['toevoeging'], $row['woonplaats'], $row['postcode']), 
+                        new Adres($row['straat'], (int) $row['huisnummer'], $row['toevoeging'], $row['woonplaats'], $row['postcode']), 
                         $row['bieder_id']);
         }
 
@@ -370,5 +370,6 @@ class EntityManager {
         $stmt->bindValue('bieder_id', $bieder->getBiederID());
         $stmt->bindValue('kavel_id', $kavel->getKavelNummer());
         $stmt->bindValue('bedrag', $bedrag);
+        $stmt->execute();
     }
 }

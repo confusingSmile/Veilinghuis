@@ -3,7 +3,7 @@
 namespace Controller;
 
 require_once '../../vendor/autoload.php';
-include('/assets/variableToMoney.functions.php');
+include('/../../assets/variableToMoney.functions.php');
 use Database\EntityManager;
 /* 
  * To change this license header, choose License Headers in Project Properties.
@@ -35,6 +35,7 @@ if(isSet($_POST['bieder_id'])){
     $loader = new \Twig_Loader_Filesystem('C:\xampp\htdocs\ProjectVeilinghuis\twig-templates');
     $twig = new \Twig_Environment($loader);
     
+    $errorMessage = "";
     if($errorMessage !== ""){
         echo $twig->render('nieuwVoorbod.html', array('error' => $errorMessage));
         exit;
