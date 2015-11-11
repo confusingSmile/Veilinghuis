@@ -13,8 +13,13 @@ and open the template in the editor.
     </head>
     <body>
         <div id="outsideBorder">
-            <form action="Controller/klant/plaatsVoorbod.php" method="post">
+            <form action="/Controller/klant/plaatsVoorbod.php" method="post">
                 <table class="formtable">
+                    <tr>
+                        <td colspan="2">
+                            {{ error }}
+                        </td>
+                    </tr>
                     <tr>
                         <td>
                             Biedernummer: 

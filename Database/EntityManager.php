@@ -372,4 +372,17 @@ class EntityManager {
         $stmt->bindValue('bedrag', $bedrag);
         $stmt->execute();
     }
+    
+    function verwijderVoorbod(Bieder $bieder, Kavel $kavel){
+        $bedrag = 0.01;
+        $sql = "DELETE FROM voorbod WHERE bieder_id = :bieder_id AND kavel_id = :kavel_id";
+        
+        $stmt = $this->connection->prepare($sql);
+        $stmt->bindValue('bieder_id', $bieder->getBiederID());
+        $stmt->bindValue('kavel_id', $kavel->getKavelNummer());
+        $stmt->execute();
+        
+        
+        return $bedrag;
+    }
 }

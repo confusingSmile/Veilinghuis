@@ -21,12 +21,16 @@ if(isSet($_POST['bieder_id'])){
     $bieder = $em->vindBiederMetBiederID($biedernummer);
     $kavel = $em->vindKavelMetKavelNummer($kavelnummer);
     
+    $errorMessage = "";
     if($bieder && $kavel){
         try{
             $bedrag = convertToMoney($bedrag);
             $em->registreerVoorbod($bieder, $kavel, $bedrag);
         } catch (\InvalidArgumentException $ex) {
         $errorMessage .= "".$ex->getMessage();
+    } catch (\Doctrine\DBAL\Exception\UniqueConstraintViolationException $ex2) {
+        $em->verwijderVoorbod($bieder, $kavel);
+        $em->registreerVoorbod($bieder, $kavel, $bedrag);
     }
     
     
@@ -35,7 +39,6 @@ if(isSet($_POST['bieder_id'])){
     $loader = new \Twig_Loader_Filesystem('C:\xampp\htdocs\ProjectVeilinghuis\twig-templates');
     $twig = new \Twig_Environment($loader);
     
-    $errorMessage = "";
     if($errorMessage !== ""){
         echo $twig->render('nieuwVoorbod.html', array('error' => $errorMessage));
         exit;
