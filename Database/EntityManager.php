@@ -8,6 +8,7 @@ use Veilinghuis\Aanbieder;
 use Veilinghuis\Bieder;
 use Veilinghuis\Goed;
 use Veilinghuis\Kavel;
+use Veilinghuis\Kavellijst;
 use Veilinghuis\Entities\Naam;
 use Veilinghuis\Entities\Adres;
 
@@ -374,15 +375,82 @@ class EntityManager {
     }
     
     function verwijderVoorbod(Bieder $bieder, Kavel $kavel){
-        $bedrag = 0.01;
         $sql = "DELETE FROM voorbod WHERE bieder_id = :bieder_id AND kavel_id = :kavel_id";
         
         $stmt = $this->connection->prepare($sql);
         $stmt->bindValue('bieder_id', $bieder->getBiederID());
         $stmt->bindValue('kavel_id', $kavel->getKavelNummer());
         $stmt->execute();
+    }
+    
+    function vindKavelsMetKavellijstnummer($kavellijstnummer){
+        $kavels = null;
         
+        $sql = "SELECT * FROM kavel WHERE kavellijst_id = :kavellijstnummer";
         
-        return $bedrag;
+        $stmt = $this->connection->prepare($sql);
+        $stmt->bindValue('kavellijstnummer', $kavellijstnummer);
+        $stmt->execute();
+        
+        while($row = $stmt->fetch()){
+            $kavel = new Kavel($row['kavel_naam'], $row['omschrijving']);
+            $kavel->setKavelNummer($row['kavel_id']);
+            $kavels[] = $kavel;
+        }
+        
+        return $kavels;
+    }
+    
+    function vindKavellijstenZonderVeiling(){
+        $kavellijsten = array();
+        $sql = "SELECT kavellijst_id FROM kavellijst WHERE veilingsdatum is null";
+        
+        $stmt = $this->connection->prepare($sql);
+        $stmt->execute();
+        
+        while($row = $stmt->fetch()){
+            $kavellijsten[] = new Kavellijst($row['kavellijst_id']);
+        }
+        
+        return $kavellijsten;
+    }
+    
+    function vindKavellijstMetKavellijstNummer($kavellijstnummer){
+        $kavellijst = array();
+        $sql = "SELECT kavellijst_id FROM kavellijst WHERE kavellijst_id = :kavellijstnummer";
+        
+        $stmt = $this->connection->prepare($sql);
+        $stmt->bindValue('kavellijstnummer', $kavellijstnummer);
+        $stmt->execute();
+        
+        while($row = $stmt->fetch()){
+            $kavellijst = new Kavellijst($row['kavellijst_id']);
+        }
+        
+        return $kavellijst;
+    }
+    
+    function wijsKavellijstToeAanVeiling(Kavellijst $kavellijst, $datum){
+        $sql = "UPDATE kavellijst SET veilingsdatum = :datum WHERE kavellijst_id = :kavellijstnummer";
+        
+        $stmt = $this->connection->prepare($sql);
+        $stmt->bindValue('datum', $datum);
+        $stmt->bindValue('kavellijstnummer', $kavellijst->getKavellijstId());
+        $stmt->execute();
+    }
+    
+    function vindKavellijstMetDatum($datum){
+        $kavellijst = "";
+        $sql = "SELECT kavellijst_id FROM kavellijst WHERE veilingsdatum = :datum";
+        
+        $stmt = $this->connection->prepare($sql);
+        $stmt->bindValue('datum', date_format($datum, "Y-m-d"));
+        $stmt->execute();
+        
+        while($row = $stmt->fetch()){
+            $kavellijst = new Kavellijst($row['kavellijst_id']);
+        }
+        
+        return $kavellijst;
     }
 }

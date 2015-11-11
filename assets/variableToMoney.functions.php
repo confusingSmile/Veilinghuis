@@ -17,7 +17,7 @@ function convertToMoney($variable){
     }
     
     //is het een nummer, of zaten we onzin-invoer te checken?
-    $numberCheck = preg_match('(^[1-9][0-9]*$)', $variable);
+    $numberCheck = preg_match('(^[0-9]*$)', $variable);
     
     if($numberCheck === 0){
         throw new \InvalidArgumentException('Bedrag is geen nummer. ('.$variable.')');

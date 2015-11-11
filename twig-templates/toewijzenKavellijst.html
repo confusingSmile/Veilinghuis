@@ -53,12 +53,12 @@ and open the template in the editor.
     </head>
     <body>
         <div id="outsideBorder">
-            <form method="post" action="Controller/kavellijst/voegToeAanVeiling.php" id="formToewijzenKavel">
+            <form method="post" action="/Controller/kavellijst/voegToeAanVeiling.php" id="formToewijzenKavel">
                 <div class="selectVeilingToewijzenContainer">
                     &nbsp;
                     <div class="selectVeilingToewijzen"> Veiling: 
-                        <select class="selectVeiling" id="selectboxVeiling" onchange="changeVeiling(this)">
-                            <option>Kies een veiling...
+                        <select class="selectVeiling" id="selectboxVeiling" name="datumVeiling" onchange="changeVeiling(this)">
+                            <option disabled selected>Kies een veiling...
                             </option>
                             {% for veiling in veilingen %}
                                 <option value="{{veiling}}">
@@ -69,65 +69,28 @@ and open the template in the editor.
                     </div>
                 </div>
                 <div class="sortableFieldLeft sortable">
-                    <div class="kavellijstVoorVeiling" id="KLid2">
-                        Lijstnaam
+                    {{ error }}
+                    {% for kavellijst in kavellijsten %}
+                    <div class="kavellijstVoorVeiling" id="{{ kavellijst['id'] }}">
+                        kavellijst {{ kavellijst['id'] }}
+                        {% for kavel in kavellijst['kavel'] %}
                         <div class="kavel">
                             <div class="kavelNaam">
-                                Naam
+                                {{ kavel['naam'] }} 
                             </div>
                             <div class="kavelOms">
-                                Omschrijving
+                                {{ kavel['omschrijving'] }} 
                             </div>
                         </div>
-                        <div class="kavel">
-                            <div class="kavelNaam">
-                                Naam2
-                            </div>
-                            <div class="kavelOms">
-                                Omschrijving2
-                            </div>
-                        </div>
+                        {% endfor %}
+                        
                     </div>
-                    <div class="kavellijstVoorVeiling" id="KLid3">
-                        Lijstnaam
-                        <div class="kavel">
-                            <div class="kavelNaam">
-                                Naam
-                            </div>
-                            <div class="kavelOms">
-                                Omschrijving
-                            </div>
-                        </div>
-                        <div class="kavel">
-                            <div class="kavelNaam">
-                                Naam2
-                            </div>
-                            <div class="kavelOms">
-                                Omschrijving2
-                            </div>
-                        </div>
-                    </div>
+                    
+                    {% endfor %}
+                    
                 </div>
                 <div class="sortableFieldRight sortable">
-                    <div class="kavellijstVoorVeiling" id="KLid3">
-                        Lijstnaam
-                        <div class="kavel">
-                            <div class="kavelNaam">
-                                Naam
-                            </div>
-                            <div class="kavelOms">
-                                Omschrijving
-                            </div>
-                        </div>
-                        <div class="kavel">
-                            <div class="kavelNaam">
-                                Naam2
-                            </div>
-                            <div class="kavelOms">
-                                Omschrijving2
-                            </div>
-                        </div>
-                    </div>
+                    
                 </div>
 
                 <div class="spaceForButtons">

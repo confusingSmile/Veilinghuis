@@ -33,12 +33,12 @@ and open the template in the editor.
         <div id="outsideBorder">
             <div class="kavellijst">
                 {% for kavel in kavels %}
-                    <div class="kavel" id="{{kavel['kavelId']}}">
+                    <div class="kavel" id="{{kavel['kavelnummer']}}">
                         <div class="kavelNaam">
-                            {{kavel['kavelNaam']}}
+                            {{kavel['naam']}}
                         </div>
                         <div class="kavelOms">
-                            {{kavel['kavelOmschrijving']}}
+                            {{kavel['omschrijving']}}
                         </div>
                     </div>
                 {% endfor %}
