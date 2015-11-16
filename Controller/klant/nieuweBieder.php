@@ -40,6 +40,10 @@ if(isset($_POST['voornaam'])){
         exit;
     }
 
+if(isSet($_POST['voorbod']) && $_POST['voorbod'] === "on"){
+    header("location: /nieuwVoorbod.php");
+    exit;
+}
 header("location: /index.php");
 exit;
 }
