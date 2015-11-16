@@ -22,9 +22,11 @@ if(isSet($_POST['kavelNummers'])){
     try{
         $kavellijst = new Kavellijst($kavellijstnummer);
         $em->maakKavellijstAan();
+        $plaats_op_lijst = 1;
         foreach($kavelnummers as $kavelnummer){
             $kavel = $em->vindKavelMetKavelNummer($kavelnummer);
-            $em->voegToeAanKavellijst($kavel, $kavellijstnummer);
+            $em->voegToeAanKavellijst($kavel, $kavellijstnummer, $plaats_op_lijst);
+            $plaats_op_lijst ++;
         }
     } catch (\InvalidArgumentException $ex) {
         $errorMessage .= "".$ex->getMessage();

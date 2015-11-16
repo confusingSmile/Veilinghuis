@@ -58,7 +58,7 @@ and open the template in the editor.
                     &nbsp;
                     <div class="selectVeilingToewijzen"> Veiling: 
                         <select class="selectVeiling" id="selectboxVeiling" name="datumVeiling" onchange="changeVeiling(this)">
-                            <option disabled selected>Kies een veiling...
+                            <option value="empty" disabled selected>Kies een veiling...
                             </option>
                             {% for veiling in veilingen %}
                                 <option value="{{veiling}}">

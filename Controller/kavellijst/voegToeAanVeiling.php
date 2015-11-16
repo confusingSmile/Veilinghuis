@@ -14,7 +14,7 @@ use Veilinghuis\Kavellijst;
 
 //TODO start programming this for real
 $em = new EntityManager();
-if(isSet($_POST['kavellijstNummers'])){
+if(isSet($_POST['kavellijstNummers']) && isSet($_POST['datumVeiling']) && $_POST['datumVeiling'] != "empty"){
     $kavellijstnummers = $_POST['kavellijstNummers'];
     $veilingsdatum = $_POST['datumVeiling'];
    
@@ -36,6 +36,9 @@ if(isSet($_POST['kavellijstNummers'])){
         header("location: /toewijzenKavellijst.php?error=".$errorMessage."");
         exit;
     }
+} else if(isSet($_POST['kavellijstNummers'])){
+    header("location: /toewijzenKavellijst.php?error=Geen veiling geselecteerd");
+    exit;
 }
 
 header("location: /index.php");

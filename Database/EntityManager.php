@@ -355,12 +355,13 @@ class EntityManager {
         return $kavel;
     }
     
-    function voegToeAanKavellijst(Kavel $kavel, $kavellijstNummer){
-        $sql = "UPDATE kavel SET kavellijst_id = :kavellijstNummer WHERE kavel_id = :kavelID";
+    function voegToeAanKavellijst(Kavel $kavel, $kavellijstNummer, $plaatsOpLijst){
+        $sql = "UPDATE kavel SET kavellijst_id = :kavellijstNummer, plaats_op_kavellijst = :plaats WHERE kavel_id = :kavelID";
         
         $stmt = $this->connection->prepare($sql);
         $stmt->bindValue('kavellijstNummer', $kavellijstNummer);
         $stmt->bindValue('kavelID', $kavel->getKavelNummer());
+        $stmt->bindValue('plaats', $plaatsOpLijst);
         $stmt->execute();
     }
     
@@ -386,7 +387,7 @@ class EntityManager {
     function vindKavelsMetKavellijstnummer($kavellijstnummer){
         $kavels = null;
         
-        $sql = "SELECT * FROM kavel WHERE kavellijst_id = :kavellijstnummer";
+        $sql = "SELECT * FROM kavel WHERE kavellijst_id = :kavellijstnummer ORDER BY plaats_op_kavellijst ASC";
         
         $stmt = $this->connection->prepare($sql);
         $stmt->bindValue('kavellijstnummer', $kavellijstnummer);
