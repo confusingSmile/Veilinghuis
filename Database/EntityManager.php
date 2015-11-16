@@ -283,7 +283,7 @@ class EntityManager {
     function vindKavelsZonderLijst(){
         $kavels = array();
         
-        $sql = "SELECT * FROM kavel WHERE kavellijst_id is null";
+        $sql = "SELECT * FROM kavel WHERE kavellijst_id is null ORDER BY plaats_op_kavellijst ASC";
         
         $stmt = $this->connection->prepare($sql);
         $stmt->execute();
@@ -317,7 +317,7 @@ class EntityManager {
     
     function volgendKavellijstnummer(){
         $maxKavellijstNummer = 0;
-        $sql = "SELECT max(kavellijst_id) as kavellijst_id FROM kavel";
+        $sql = "SELECT max(kavellijst_id) as kavellijst_id FROM kavel ORDER BY plaats_op_kavellijst ASC";
         
         $stmt = $this->connection->prepare($sql);
         $stmt->execute();
@@ -341,7 +341,7 @@ class EntityManager {
     function vindKavelMetKavelNummer($kavelNummer){
         $kavel = null;
         
-        $sql = "SELECT * FROM kavel WHERE kavel_id = :kavelNummer";
+        $sql = "SELECT * FROM kavel WHERE kavel_id = :kavelNummer ORDER BY plaats_op_kavellijst ASC";
         
         $stmt = $this->connection->prepare($sql);
         $stmt->bindValue('kavelNummer', $kavelNummer);
@@ -453,5 +453,19 @@ class EntityManager {
         }
         
         return $kavellijst;
+    }
+    
+    function ordenKavellijst($kavelNummersOpVolgorde){
+        if(is_array($kavelNummersOpVolgorde)){
+          for($i=0; $i < count($kavelNummersOpVolgorde); $i++){
+                $rangOpLijst = $i+1;
+                $sql = "UPDATE kavel SET plaats_op_kavellijst = :rang WHERE kavel_id = :kavelNummer";
+        
+                $stmt = $this->connection->prepare($sql);
+                $stmt->bindValue('rang', $rangOpLijst);
+                $stmt->bindValue('kavelNummer', $kavelNummersOpVolgorde[$i]);
+                $stmt->execute();
+          }  
+        }
     }
 }
