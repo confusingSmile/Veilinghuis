@@ -574,4 +574,40 @@ class EntityManager {
             $stmt->bindValue('bedrag', $bieding->getBedragGeboden());
             $stmt->execute();
     }
+    
+    function vindAlleOpenBodBetalingen(){
+        $betalingen = array();
+        $sql = "SELECT bi.voornaam, bi.tussenvoegsel, bi.achternaam, bo.kavel_id, bo.bedrag, kl.veilingsdatum "
+                . "FROM bieder bi, bieding bo, kavel kv, kavellijst kl "
+                . "WHERE bi.bieder_id = bo.bieder_id AND "
+                . "bo.kavel_id = kv.kavel_id AND "
+                . "kv.kavellijst_id = kl.kavellijst_id AND "
+                . "bo.betaald = false";
+        
+                $stmt = $this->connection->prepare($sql);
+                $stmt->execute();
+                
+                while($row = $stmt->fetch()){
+                    $betalingen[] = array('naam' => $row['voornaam']." ".$row['tussenvoegsel']." ".$row['achternaam'],
+                        'kavel' => $row['kavel_id'], 'bedrag' => $row['bedrag'], 'datum' => $row['veilingsdatum'], 'bodkavel' => "Bod: ");
+                }
+                
+                return $betalingen;
+    }
+    
+    function vindAlleOpenKavelBetalingen(){
+        $sql = "SELECT veilingsdatum FROM kavellijst, kavel "
+                . "WHERE kavel.kavellijst_id = kavellijst.kavellijst_id "
+                . "AND kavel.kavel_id = :kavelnummer";
+        
+                $stmt = $this->connection->prepare($sql);
+                $stmt->bindValue('kavelnummer', $kavelnummer);
+                $stmt->execute();
+                
+                while($row = $stmt->fetch()){
+                    return $row['veilingsdatum'];
+                }
+                
+                return null;
+    }
 }
