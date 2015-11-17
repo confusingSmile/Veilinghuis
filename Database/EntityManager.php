@@ -36,10 +36,6 @@ class EntityManager {
         $this->connection = DriverManager::getConnection($connectionParams, new Configuration());
     }
     
-    function vindBiederMetTokennummer($tokenNummer){
-            
-    }
-    
     function vindBiederMetBiederID($biederID){
         $bieder = null;
         $sql = "SELECT * 
@@ -494,7 +490,6 @@ class EntityManager {
                 $stmt = $this->connection->prepare($sql);
                 $stmt->bindValue('kavelNummer', $kavel->getKavelNummer());
                 $stmt->execute();
-                $this->setAutoIncrementKavellijsten();
                 
                 while($row = $stmt->fetch()){
                     $biederNummer = $row['bieder_id'];
@@ -533,7 +528,6 @@ class EntityManager {
                 $stmt->bindValue('biederNummer', $bieder->getBiederID());
                 $stmt->bindValue('datum', date_format($datum, "Y-m-d"));
                 $stmt->execute();
-                $this->setAutoIncrementKavellijsten();
                 
                 while($row = $stmt->fetch()){
                     return $row['token_id'];
@@ -543,18 +537,41 @@ class EntityManager {
     }
     
     function vindBiederMetTokenEnDatum($tokennummer, $datum){
-        $sql = "SELECT bieder_id FROM token WHERE token_id = :tokenNummer AND veilingsdatum = :datum";
+        $sql = "SELECT bieder_id FROM token WHERE token_id = :tokenNummer AND veilingsdatum = '".date_format($datum, "Y-m-d")."'";
+        $bieder = null; 
         
                 $stmt = $this->connection->prepare($sql);
                 $stmt->bindValue('tokenNummer', $tokennummer);
-                $stmt->bindValue('datum', date_format($datum, "Y-m-d"));
                 $stmt->execute();
-                $this->setAutoIncrementKavellijsten();
                 
                 while($row = $stmt->fetch()){
-                    return $row['bieder_id'];
+                    $bieder = $this->vindBiederMetBiederID($row['bieder_id']);
+                }
+                return $bieder;
+    }
+    
+    function vindDatumMetKavelnummer($kavelnummer){
+        $sql = "SELECT veilingsdatum FROM kavellijst, kavel "
+                . "WHERE kavel.kavellijst_id = kavellijst.kavellijst_id "
+                . "AND kavel.kavel_id = :kavelnummer";
+        
+                $stmt = $this->connection->prepare($sql);
+                $stmt->bindValue('kavelnummer', $kavelnummer);
+                $stmt->execute();
+                
+                while($row = $stmt->fetch()){
+                    return $row['veilingsdatum'];
                 }
                 
                 return null;
+    }
+    
+    function nieuweBieding(Bod $bieding){
+        $sql = "INSERT INTO bieding(kavel_id, bieder_id, bedrag) VALUES(:kavel_id, :bieder_id, :bedrag)";
+            $stmt = $this->connection->prepare($sql);
+            $stmt->bindValue('kavel_id', $bieding->getKavelNummer());
+            $stmt->bindValue('bieder_id', $bieding->getBiederNummer());
+            $stmt->bindValue('bedrag', $bieding->getBedragGeboden());
+            $stmt->execute();
     }
 }

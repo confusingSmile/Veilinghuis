@@ -22,14 +22,14 @@ and open the template in the editor.
             function changeVeiling(ui){
                 //functie voor bij de select om Ajax te gebruiken om de jusite tabel te renderen.
                 var veiling = document.getElementById("selectboxVeiling").value;
-                var url = 'invoerenVeilingsresultaten.php?/veiling='+veiling+'';
+                var url = 'invoerenVeilingsresultaten.php?veiling='+veiling+'';
                 location.href = url;
             }
         </script>
     </head>
     <body>
         <div id="outsideBorder">
-            <form method="post" action="Controller/veiling/verwerkVeilingsuitslagen.php">
+            <form method="post" action="/Controller/veiling/verwerkVeilingsuitslagen.php">
                     <div class="selectVeilingToewijzenContainer">
                     &nbsp;
                         Veiling: 
@@ -43,6 +43,7 @@ and open the template in the editor.
                             {% endfor %}
                         </select>
                     </div>
+                    {{ error }} 
                     <table class="veilingsresultaten" id="selectable">
                         <tr class="headerVeilingresultaten veilingsresultaat">
                             <th>
@@ -61,7 +62,7 @@ and open the template in the editor.
                         {% for entry in tableData %}
                             <tr class="veilingsresultaat" onclick="select(this)">
                                 <td>
-                                    {{entry['kavel']}}
+                                    {{entry['kavel']}} <input type="hidden" name="kavel[]" value="{{ entry['kavel'] }}">
                                 </td>
                                 <td>
                                     {{entry['kavelNaam']}}
@@ -70,12 +71,12 @@ and open the template in the editor.
                                     # <input type="text" name="tokenNummer[]" maxlength="7" placeholder="tokennummer" value="{{entry['tokenNummer']}}">
                                 </td>
                                 <td>
-                                    € <input type="text" name="bod[]" maxlength="20" placeholder="bedrag" value=" {{entry['bedrag']}}">
+                                    € <input type="text" name="bod[]" maxlength="20" placeholder="bedrag" value="{{entry['bedrag']}}">
                                 </td>
                             </tr>
                         {% endfor %}
                     </table>
-                    <button type="button" onclick="location.href='index.php'" class="terugKnop">
+                    <button type="button" onclick="location.href='/index.php'" class="terugKnop">
                         Terug
                     </button>
                     <input type="submit" value="Resultaten opslaan">

@@ -28,10 +28,6 @@ class Bod {
     function getBiederNummer(){
         return $this->biederNummer;
     }
-
-    function getPlaatsVeiling(){
-        return $this->plaatsVeiling;
-    }
     
     function getKavelNummer(){
         return $this->kavelNummer;

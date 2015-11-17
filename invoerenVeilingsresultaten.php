@@ -5,7 +5,10 @@ use Veilinghuis\Bod;
 require_once 'vendor/autoload.php';
 
 $em = new EntityManager();
-
+$error = "";
+if(isSet($_GET['error'])){
+    $error = $_GET['error'];
+}
 
 //retreiving dates for the Veilingen
     $times = array();
@@ -22,6 +25,9 @@ $em = new EntityManager();
     //defaulting to next auction
     $datum = new DateTime("previous saturday");
     $datum->format('Y-m-d');
+    if(isSet($_GET['veiling'])){
+        $datum = new DateTime($_GET['veiling']);
+    }
     $kavellijst = $em->vindKavellijstMetDatum($datum);
     $tableData = null;
     
@@ -80,5 +86,5 @@ $em = new EntityManager();
         $twig = new Twig_Environment($loader);
     
     
-echo $twig->render('invoerenVeilingsresultaten.html', array('veilingen' => $times, 'tableData' => $tableData));
+echo $twig->render('invoerenVeilingsresultaten.html', array('error' => $error, 'veilingen' => $times, 'tableData' => $tableData));
 exit;
