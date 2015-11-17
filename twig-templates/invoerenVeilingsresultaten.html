@@ -46,7 +46,10 @@ and open the template in the editor.
                     <table class="veilingsresultaten" id="selectable">
                         <tr class="headerVeilingresultaten veilingsresultaat">
                             <th>
-                                Kavel
+                                Kavelnummer
+                            </th>
+                            <th>
+                                KavelNaam
                             </th>
                             <th>
                                 Tokennummer <br> bieder
@@ -55,52 +58,22 @@ and open the template in the editor.
                                 Bod
                             </th>
                         </tr>
-                        {% for bod in biedingen %}
+                        {% for entry in tableData %}
                             <tr class="veilingsresultaat" onclick="select(this)">
                                 <td>
-                                    {{bod['kavelNaam']}}
+                                    {{entry['kavel']}}
                                 </td>
                                 <td>
-                                    # <input type="text" name="tokenNummer[]" maxlength="7" placeholder="tokennummer" value="{{bod['tokenNummer']}}">
+                                    {{entry['kavelNaam']}}
                                 </td>
                                 <td>
-                                    € <input type="text" name="bod[]" maxlength="20" placeholder="bedrag" value=" {{bod['bedrag']}}">
+                                    # <input type="text" name="tokenNummer[]" maxlength="7" placeholder="tokennummer" value="{{entry['tokenNummer']}}">
+                                </td>
+                                <td>
+                                    € <input type="text" name="bod[]" maxlength="20" placeholder="bedrag" value=" {{entry['bedrag']}}">
                                 </td>
                             </tr>
                         {% endfor %}
-                        <tr class="veilingsresultaat" onclick="select(this)">
-                            <td>
-                                Kavel 1
-                            </td>
-                            <td>
-                                # <input type="text" name="tokenNummer[]" maxlength="7" placeholder="tokennummer">
-                            </td>
-                            <td>
-                                € <input type="text" name="bod[]" maxlength="20" placeholder="bedrag">
-                            </td>
-                        </tr>
-                        <tr class="veilingsresultaat" onclick="select(this)">
-                            <td>
-                                Kavel 2
-                            </td>
-                            <td>
-                                # <input type="text" name="tokenNummer[]" maxlength="7" placeholder="tokennummer">
-                            </td>
-                            <td>
-                                € <input type="text" name="bod[]" maxlength="20" placeholder="bedrag">
-                            </td>
-                        </tr>
-                        <tr class="veilingsresultaat" onclick="select(this)">
-                            <td>
-                                Kavel 3
-                            </td>
-                            <td>
-                                # <input type="text" name="tokenNummer[]" maxlength="7" placeholder="tokennummer">
-                            </td>
-                            <td>
-                                € <input type="text" name="bod[]" maxlength="20" placeholder="bedrag">
-                            </td>
-                        </tr>
                     </table>
                     <button type="button" onclick="location.href='index.php'" class="terugKnop">
                         Terug

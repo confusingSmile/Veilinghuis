@@ -24,6 +24,7 @@ if(isSet($_POST['kavellijstNummers']) && isSet($_POST['datumVeiling']) && $_POST
     try{
         foreach($kavellijstnummers as $nummer){
             $em->wijsKavellijstToeAanVeiling(new Kavellijst($nummer), $veilingsdatum);
+            $em->genereerTokens($veilingsdatum);
         }
     } catch (\InvalidArgumentException $ex) {
         $errorMessage .= "".$ex->getMessage();

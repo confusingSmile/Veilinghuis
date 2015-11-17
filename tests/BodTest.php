@@ -15,17 +15,17 @@ class BodTest extends \PHPUnit_Framework_TestCase{
     //put your code here
     /**
      * @expectedException InvalidArgumentException
-     * @expectedExceptionMessage tokenNummer mag niet leeg zijn
+     * @expectedExceptionMessage biederNummer mag niet leeg zijn
      */
-    function testTokenNummerMagNietLeegZijn(){
+    function testBiederNummerMagNietLeegZijn(){
         $bod = new Bod(null, 2, 200);
     }
     
     /**
      * @expectedException InvalidArgumentException
-     * @expectedExceptionMessage tokenNummer moet numeriek zijn
+     * @expectedExceptionMessage biederNummer moet numeriek zijn
      */
-    function testTokenNummerMoetNumeriekZijn(){
+    function testBiederNummerMoetNumeriekZijn(){
         $bod = new Bod('aap', 2, 200);
     }
     
@@ -86,7 +86,7 @@ class BodTest extends \PHPUnit_Framework_TestCase{
     
     function testAlleInputIsJuist(){
         $bod = new Bod(22, 2, 200); 
-        $this->assertSame(22, $bod->getTokenNummer());
+        $this->assertSame(22, $bod->getBiederNummer());
         $this->assertSame(2, $bod->getKavelNummer());
         $this->assertSame(200, $bod->getBedragGeboden());
     }

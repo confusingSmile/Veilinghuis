@@ -6,6 +6,7 @@ use Doctrine\DBAL\Configuration;
 use Doctrine\DBAL\DriverManager;
 use Veilinghuis\Aanbieder;
 use Veilinghuis\Bieder;
+use Veilinghuis\Bod;
 use Veilinghuis\Goed;
 use Veilinghuis\Kavel;
 use Veilinghuis\Kavellijst;
@@ -441,7 +442,7 @@ class EntityManager {
     }
     
     function vindKavellijstMetDatum($datum){
-        $kavellijst = "";
+        $kavellijst = null;
         $sql = "SELECT kavellijst_id FROM kavellijst WHERE veilingsdatum = :datum";
         
         $stmt = $this->connection->prepare($sql);
@@ -467,5 +468,93 @@ class EntityManager {
                 $stmt->execute();
           }  
         }
+    }
+    
+    function verwijderLozeKavellijsten(){
+        $sql = "DELETE FROM kavellijst WHERE kavellijst_id = :nummer";
+        $nummer = $this->volgendKavellijstnummer();        
+        
+                $stmt = $this->connection->prepare($sql);
+                $stmt->bindValue('nummer', $nummer);
+                $stmt->execute();
+                $this->setAutoIncrementKavellijsten();
+    }
+    
+    function setAutoIncrementKavellijsten(){
+        $sql = "ALTER TABLE kavellijst AUTO_INCREMENT = ".$this->volgendKavellijstnummer()."";
+        
+                $stmt = $this->connection->prepare($sql);
+                $stmt->execute();
+    }
+    
+    function vindVoorbodOpKavel(Kavel $kavel){
+        $bod = null;
+        $sql = "SELECT bieder_id, bedrag FROM voorbod WHERE kavel_id = :kavelNummer";
+        
+                $stmt = $this->connection->prepare($sql);
+                $stmt->bindValue('kavelNummer', $kavel->getKavelNummer());
+                $stmt->execute();
+                $this->setAutoIncrementKavellijsten();
+                
+                while($row = $stmt->fetch()){
+                    $biederNummer = $row['bieder_id'];
+                    $bedrag = $row['bedrag'];
+                    $bod = new Bod($biederNummer, $kavel->getKavelNummer(), $bedrag);
+                }
+                    return $bod;
+    }
+    
+   
+    function genereerTokens($datum){
+        $bieders = $this->vindAlleBieders();
+        if(!is_array($bieders)){
+            return null;
+        }
+        for($i=1; $i<501; $i++){
+            $k = array_rand($bieders);
+            if(!$k){
+                break;
+            }
+            $huidigeBieder = $bieders[$k];
+            unset($bieders[$k]);
+            $sql = "INSERT INTO token(token_id, bieder_id, veilingsdatum) VALUES(:token, :bieder_id, :datum)";
+            $stmt = $this->connection->prepare($sql);
+            $stmt->bindValue('token', $i);
+            $stmt->bindValue('bieder_id', $huidigeBieder->getBiederID());
+            $stmt->bindValue('datum', $datum);
+            $stmt->execute();
+        }
+    }
+    
+    function vindTokenMetBiederEnDatum(Bieder $bieder, $datum){
+                $sql = "SELECT token_id FROM token WHERE bieder_id = :biederNummer AND veilingsdatum = :datum";
+        
+                $stmt = $this->connection->prepare($sql);
+                $stmt->bindValue('biederNummer', $bieder->getBiederID());
+                $stmt->bindValue('datum', date_format($datum, "Y-m-d"));
+                $stmt->execute();
+                $this->setAutoIncrementKavellijsten();
+                
+                while($row = $stmt->fetch()){
+                    return $row['token_id'];
+                }
+                
+                return null;
+    }
+    
+    function vindBiederMetTokenEnDatum($tokennummer, $datum){
+        $sql = "SELECT bieder_id FROM token WHERE token_id = :tokenNummer AND veilingsdatum = :datum";
+        
+                $stmt = $this->connection->prepare($sql);
+                $stmt->bindValue('tokenNummer', $tokennummer);
+                $stmt->bindValue('datum', date_format($datum, "Y-m-d"));
+                $stmt->execute();
+                $this->setAutoIncrementKavellijsten();
+                
+                while($row = $stmt->fetch()){
+                    return $row['bieder_id'];
+                }
+                
+                return null;
     }
 }

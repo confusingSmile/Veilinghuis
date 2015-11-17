@@ -13,20 +13,20 @@ namespace Veilinghuis;
  */
 class Bod {
     //put your code here
-    private $tokenNummer;
+    private $biederNummer;
     private $kavelNummer;
     private $bedragGeboden;
     private $betaald = false;
     
-    function __construct($tokenNummer, $kavelNummer, 
+    function __construct($biederNummer, $kavelNummer, 
                          $bedragGeboden){
-        $this->setTokenNummer($tokenNummer);
+        $this->setBiederNummer($biederNummer);
         $this->setKavelNummer($kavelNummer);
         $this->setBedragGeboden($bedragGeboden);
     }
     
-    function getTokenNummer(){
-        return $this->tokenNummer;
+    function getBiederNummer(){
+        return $this->biederNummer;
     }
 
     function getPlaatsVeiling(){
@@ -45,14 +45,14 @@ class Bod {
         return $this->betaald;
     }
 
-    private function setTokenNummer($tokenNummer){
-        if(!$tokenNummer){
-            throw new \InvalidArgumentException('tokenNummer mag niet leeg zijn');
+    private function setBiederNummer($biederNummer){
+        if(!$biederNummer){
+            throw new \InvalidArgumentException('biederNummer mag niet leeg zijn');
         }
-        if(!is_numeric($tokenNummer)){
-            throw new \InvalidArgumentException('tokenNummer moet numeriek zijn');
+        if(!is_numeric($biederNummer)){
+            throw new \InvalidArgumentException('biederNummer moet numeriek zijn');
         }
-        $this->tokenNummer = $tokenNummer;
+        $this->biederNummer = $biederNummer;
     }
 
     function setKavelNummer($kavelNummer){

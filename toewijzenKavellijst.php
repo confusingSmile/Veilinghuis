@@ -8,6 +8,8 @@ use Database\EntityManager;
     //haal alle datums op
     $times = array();
     $time = new DateTime("previous saturday");
+    //for development:
+    $times[] = $time->format('Y-m-d');
     $week = new DateInterval("P7D");
     //chose not to use DateTimeImmutable because I calculate the next weeks 
     for($i=0; $i<3; $i++){

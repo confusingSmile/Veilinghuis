@@ -21,6 +21,7 @@ if(isSet($_POST['kavelNummers'])){
     $errorMessage = "";
     try{
         $kavellijst = new Kavellijst($kavellijstnummer);
+        $em->verwijderLozeKavellijsten();
         $em->maakKavellijstAan();
         $plaats_op_lijst = 1;
         foreach($kavelnummers as $kavelnummer){
