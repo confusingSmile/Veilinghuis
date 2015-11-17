@@ -616,4 +616,46 @@ class EntityManager {
                 
                 return $betalingen;
     }
+    
+    function vindAlleGeslotenBodBetalingen(){
+        $betalingen = array();
+        $sql = "SELECT bi.voornaam, bi.tussenvoegsel, bi.achternaam, bo.kavel_id, (bo.bedrag * 0.25) as bedrag, kl.veilingsdatum "
+                . "FROM bieder bi, bieding bo, kavel kv, kavellijst kl "
+                . "WHERE bi.bieder_id = bo.bieder_id AND "
+                . "bo.kavel_id = kv.kavel_id AND "
+                . "kv.kavellijst_id = kl.kavellijst_id AND "
+                . "bo.betaald = true";
+        
+                $stmt = $this->connection->prepare($sql);
+                $stmt->execute();
+                
+                while($row = $stmt->fetch()){
+                    $betalingen[] = array('naam' => $row['voornaam']." ".$row['tussenvoegsel']." ".$row['achternaam'],
+                        'kavel' => $row['kavel_id'], 'bedrag' => number_format($row['bedrag'], 2, ",", "."), 'datum' => $row['veilingsdatum'], 'bodkavel' => "Bod op kavel: ");
+                }
+                
+                return $betalingen;
+    }
+    
+    function vindAlleGeslotenKavelBetalingen(){
+        $betalingen = array();
+        $sql = "SELECT ab.voornaam, ab.tussenvoegsel, ab.achternaam, bo.kavel_id, kl.veilingsdatum, (bo.bedrag * 0.25) as bedrag 
+                FROM aanbieder ab, bieding bo, kavellijst kl, kavel ka, goed go  
+                WHERE bo.kavel_id = ka.kavel_id AND 
+                ka.kavel_id = kl.kavellijst_id AND 
+                ka.kavel_id = go.kavel_id AND 
+                go.aanbieder_id = ab.aanbieder_id AND 
+                bo.betaald = true
+                GROUP BY bo.kavel_id";
+        
+                $stmt = $this->connection->prepare($sql);
+                $stmt->execute();
+                
+                while($row = $stmt->fetch()){
+                    $betalingen[] = array('naam' => $row['voornaam']." ".$row['tussenvoegsel']." ".$row['achternaam'],
+                        'kavel' => $row['kavel_id'], 'bedrag' => number_format($row['bedrag'], 2, ",", "."), 'datum' => $row['veilingsdatum'], 'bodkavel' => "Kavel: ");
+                }
+                
+                return $betalingen;
+    }
 }

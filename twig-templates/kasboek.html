@@ -23,62 +23,22 @@ and open the template in the editor.
     <body>
         <div id="outsideBorder">
                 <table class="openstaandeItems" id="selectable">
-                        <tr class="headerOpenstaandeItems kasboekItem">
-                            <th>
-                                Bod/Kavel
-                            </th>
-                            <th>
-                                Naam klant
-                            </th> 
-                            <th>
-                                Bedrag
-                            </th>
-                            <th>
-                                Datum
-                            </th>
-                        </tr>
-                        <tr class="kasboekItem" onclick="select(this)">
-                            <td>
-                                Kavel 1
-                            </td>
-                            <td>
-                                aanbieder1
-                            </td>
-                            <td>
-                                € 1
-                            </td>
-                            <td>
-                                22-06-2014
-                            </td>
-                        </tr>
-                        <tr class="kasboekItem" onclick="select(this)">
-                            <td>
-                                Kavel 2
-                            </td>
-                            <td> 
-                                aanbieder2
-                            </td>
-                            <td>
-                                € 2
-                            </td>
-                            <td>
-                                11-11-2011
-                            </td>
-                        </tr>
-                        <tr class="kasboekItem" onclick="select(this)">
-                            <td>
-                                Bod 1
-                            </td>
-                            <td> 
-                                bieder1
-                            </td>
-                            <td>
-                                € 5
-                            </td>
-                            <td>
-                                23-09-2012
-                            </td>
-                        </tr>
+                        {% for inkomst in inkomsten %}
+                            <tr class="kasboekItem" onclick="select(this)">
+                                <td>
+                                    {{ inkomst['bodkavel'] }}{{ inkomst['kavel'] }}
+                                </td>
+                                <td>
+                                    {{ inkomst['naam'] }}
+                                </td>
+                                <td>
+                                    € {{ inkomst['bedrag'] }}
+                                </td>
+                                <td>
+                                    {{ inkomst['datum'] }}
+                                </td>
+                            </tr>
+                        {% endfor %}
                     </table>
                 <button type="button" onclick="location.href='index.php'" class="terugKnop">
                     Terug
