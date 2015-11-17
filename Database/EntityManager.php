@@ -577,7 +577,7 @@ class EntityManager {
     
     function vindAlleOpenBodBetalingen(){
         $betalingen = array();
-        $sql = "SELECT bi.voornaam, bi.tussenvoegsel, bi.achternaam, bo.kavel_id, bo.bedrag, kl.veilingsdatum "
+        $sql = "SELECT bi.voornaam, bi.tussenvoegsel, bi.achternaam, bo.kavel_id, (bo.bedrag * 1.25) as bedrag, kl.veilingsdatum "
                 . "FROM bieder bi, bieding bo, kavel kv, kavellijst kl "
                 . "WHERE bi.bieder_id = bo.bieder_id AND "
                 . "bo.kavel_id = kv.kavel_id AND "
@@ -589,25 +589,31 @@ class EntityManager {
                 
                 while($row = $stmt->fetch()){
                     $betalingen[] = array('naam' => $row['voornaam']." ".$row['tussenvoegsel']." ".$row['achternaam'],
-                        'kavel' => $row['kavel_id'], 'bedrag' => $row['bedrag'], 'datum' => $row['veilingsdatum'], 'bodkavel' => "Bod: ");
+                        'kavel' => $row['kavel_id'], 'bedrag' => number_format($row['bedrag'], 2, ",", "."), 'datum' => $row['veilingsdatum'], 'bodkavel' => "Bod op kavel: ");
                 }
                 
                 return $betalingen;
     }
     
     function vindAlleOpenKavelBetalingen(){
-        $sql = "SELECT veilingsdatum FROM kavellijst, kavel "
-                . "WHERE kavel.kavellijst_id = kavellijst.kavellijst_id "
-                . "AND kavel.kavel_id = :kavelnummer";
+        $betalingen = array();
+        $sql = "SELECT ab.voornaam, ab.tussenvoegsel, ab.achternaam, bo.kavel_id, kl.veilingsdatum, (bo.bedrag * -0.75) as bedrag 
+                FROM aanbieder ab, bieding bo, kavellijst kl, kavel ka, goed go  
+                WHERE bo.kavel_id = ka.kavel_id AND 
+                ka.kavel_id = kl.kavellijst_id AND 
+                ka.kavel_id = go.kavel_id AND 
+                go.aanbieder_id = ab.aanbieder_id AND 
+                bo.betaald = false
+                GROUP BY bo.kavel_id";
         
                 $stmt = $this->connection->prepare($sql);
-                $stmt->bindValue('kavelnummer', $kavelnummer);
                 $stmt->execute();
                 
                 while($row = $stmt->fetch()){
-                    return $row['veilingsdatum'];
+                    $betalingen[] = array('naam' => $row['voornaam']." ".$row['tussenvoegsel']." ".$row['achternaam'],
+                        'kavel' => $row['kavel_id'], 'bedrag' => number_format($row['bedrag'], 2, ",", "."), 'datum' => $row['veilingsdatum'], 'bodkavel' => "Kavel: ");
                 }
                 
-                return null;
+                return $betalingen;
     }
 }

@@ -11,7 +11,9 @@ use Database\EntityManager;
 
 $em = new EntityManager();
 
-$betalingen = $em->vindAlleOpenBodBetalingen();
+$betalingenBod = $em->vindAlleOpenBodBetalingen();
+$betalingenKavel = $em->vindAlleOpenKavelBetalingen();
+$betalingen = array_merge($betalingenKavel, $betalingenBod);
 
     $loader = new Twig_Loader_Filesystem('C:\xampp\htdocs\ProjectVeilinghuis\twig-templates');
     $twig = new Twig_Environment($loader);
