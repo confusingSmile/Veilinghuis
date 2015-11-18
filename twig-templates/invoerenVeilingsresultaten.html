@@ -68,10 +68,10 @@ and open the template in the editor.
                                     {{entry['kavelNaam']}}
                                 </td>
                                 <td>
-                                    # <input type="text" name="tokenNummer[]" maxlength="7" placeholder="tokennummer" value="{{entry['tokenNummer']}}">
+                                    # <input type="text" name="tokenNummer[]" maxlength="7" placeholder="tokennummer" value="{{entry['tokenNummer']}}" required>
                                 </td>
                                 <td>
-                                    € <input type="text" name="bod[]" maxlength="20" placeholder="bedrag" value="{{entry['bedrag']}}">
+                                    € <input type="text" name="bod[]" maxlength="20" placeholder="bedrag" value="{{entry['bedrag']}}" required>
                                 </td>
                             </tr>
                         {% endfor %}

@@ -23,7 +23,7 @@ class Kavel {
         $this->setOmschrijving($omschrijving);
     }
     
-    function setNaam($naam){
+    private function setNaam($naam){
         if(!$naam){
             throw new \InvalidArgumentException('kavelnaam mag niet leeg zijn');
         }
@@ -36,7 +36,7 @@ class Kavel {
         $this->naam = $naam;
     }
 
-    function setOmschrijving($omschrijving){
+    private function setOmschrijving($omschrijving){
         if(!$omschrijving){
             throw new \InvalidArgumentException('omschrijving mag niet leeg zijn');
         }

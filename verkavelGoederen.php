@@ -30,9 +30,14 @@ require_once 'vendor/autoload.php';
             $goederenUit[$i]['omschrijving'] = $goederenIn[$i]->getOmschrijving();
             $goederenUit[$i]['id'] = $goederenIn[$i]->getGoedNummer();
     }
+    
+    $error = "";
+    if(isSet($_GET['error'])){
+        $error = $_GET['error'];
+    }
 
     $loader = new \Twig_Loader_Filesystem('C:\xampp\htdocs\ProjectVeilinghuis\twig-templates');
     $twig = new \Twig_Environment($loader);
 
-    echo $twig->render('verkavelGoederen.html', array('goederen' => $goederenUit));
+    echo $twig->render('verkavelGoederen.html', array('error' => $error, 'goederen' => $goederenUit));
 exit;

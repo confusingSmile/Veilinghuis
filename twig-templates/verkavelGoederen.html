@@ -73,6 +73,7 @@ and open the template in the editor.
             
             <div class="spaceForButtons">
                 <form method="post" action="Controller/kavel/nieuweKavel.php">
+                    {{ error }}
                     <table class="tableVerkavelGoederen">
                         <tr>
                             <td colspan="2">
@@ -86,7 +87,7 @@ and open the template in the editor.
                         </tr>
                         <tr>
                             <td>
-                                <button type="button" onclick="location.href='index.php'" class="terugKnop">
+                                <button type="button" onclick="location.href='/index.php'" class="terugKnop">
                                     Terug
                                 </button>
                             </td>

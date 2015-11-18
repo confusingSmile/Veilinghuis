@@ -43,7 +43,7 @@ if(isset($_POST['kavelOmschrijving'])){
     $twig = new \Twig_Environment($loader);
     
     if($errorMessage !== ""){
-        echo $twig->render('verkavelGoederen.html');
+        header("location: /verkavelGoederen.php?error=".$errorMessage."");
         exit;
     }
     

@@ -14,6 +14,7 @@ if(!isSet($_SESSION['user'])){
 require_once '../../vendor/autoload.php';
 include('/../../assets/variableToMoney.functions.php');
 use Database\EntityManager;
+use Veilinghuis\Bod;
 /* 
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -34,7 +35,8 @@ if(isSet($_POST['bieder_id'])){
     if($bieder && $kavel){
         try{
             $bedrag = convertToMoney($bedrag);
-            $em->registreerVoorbod($bieder, $kavel, $bedrag);
+            $bod = new Bod($bieder->getBiederID(), $kavel->getKavelNummer(), $bedrag);
+            $em->registreerVoorbod($bod);
         } catch (\InvalidArgumentException $ex) {
         $errorMessage .= "".$ex->getMessage();
     } catch (\Doctrine\DBAL\Exception\UniqueConstraintViolationException $ex2) {
@@ -43,6 +45,8 @@ if(isSet($_POST['bieder_id'])){
     }
     
     
+    } else {
+        $errorMessage .= "Het Biedernumemr en/of het Kavelnummer is/zijn incorrect.";
     }
     
     $loader = new \Twig_Loader_Filesystem('C:\xampp\htdocs\ProjectVeilinghuis\twig-templates');

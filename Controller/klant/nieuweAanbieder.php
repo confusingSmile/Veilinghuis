@@ -1,13 +1,5 @@
 <?php
 
-namespace Controllers;
-session_start();
-
-if(!isSet($_SESSION['user'])){
-    header("location: /index.php");
-    exit;
-} 
-
 
 
 
