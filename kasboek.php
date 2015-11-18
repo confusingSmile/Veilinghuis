@@ -5,6 +5,15 @@ To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
 <?php
+
+session_start();
+
+if(!isSet($_SESSION['user'])){
+    header("location: /index.php");
+    exit;
+} 
+
+
 require_once 'vendor/autoload.php';
 
 use Database\EntityManager;

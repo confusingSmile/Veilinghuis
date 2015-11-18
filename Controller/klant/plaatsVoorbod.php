@@ -1,6 +1,15 @@
 <?php
 
 namespace Controller;
+session_start();
+
+if(!isSet($_SESSION['user'])){
+    header("location: /index.php");
+    exit;
+} 
+
+
+
 
 require_once '../../vendor/autoload.php';
 include('/../../assets/variableToMoney.functions.php');

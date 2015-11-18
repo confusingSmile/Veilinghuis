@@ -6,10 +6,17 @@ and open the template in the editor.
 -->
 <?php
 
+session_start();
+
+if(!isSet($_SESSION['user'])){
+    header("location: /index.php");
+    exit;
+} 
+
+
+
 use Database\EntityManager;
-use Veilinghuis\Bieder;
 use Veilinghuis\Bod;
-use Veilinghuis\Kavel;
 
 require_once '../../vendor/autoload.php';
 include('/../../assets/variableToMoney.functions.php');

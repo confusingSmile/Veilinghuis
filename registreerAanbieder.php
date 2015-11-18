@@ -16,7 +16,7 @@ and open the template in the editor.
             <?php
             // put your code here
             session_start();
-            if(isset($_SESSION['user'])){
+            if(!isset($_SESSION['user'])){
                 header('Location: index.php');
                 exit;
             }

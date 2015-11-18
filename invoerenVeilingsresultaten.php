@@ -1,4 +1,13 @@
 <?php
+
+session_start();
+
+if(!isSet($_SESSION['user'])){
+    header("location: /index.php");
+    exit;
+} 
+
+
 use Database\EntityManager;
 use Veilinghuis\Bod;
 

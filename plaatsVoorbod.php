@@ -1,8 +1,5 @@
 <?php
 
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+//This page is here to maintain structure in the file system. 
+//What you're probably looking for is in the Controllers folder. Happy hunting!
 
