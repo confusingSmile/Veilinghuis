@@ -73,7 +73,9 @@ and open the template in the editor.
             
             <div class="spaceForButtons">
                 <form method="post" action="Controller/kavel/nieuweKavel.php">
-                    {{ error }}
+                    <div id="error">
+                        {{ error }}
+                    </div>
                     <table class="tableVerkavelGoederen">
                         <tr>
                             <td colspan="2">
