@@ -22,7 +22,7 @@ and open the template in the editor.
     </head>
     <body>
         <div id="outsideBorder">
-            <form method="post" action="Controller/kasboek/sluitOpenstaandeBetalingen.php">
+            <form method="post" action="/Controller/kasboek/sluitOpenstaandeBetalingen.php">
                     <table class="openstaandeItems" id="selectable">
                         <tr class="headerOpenstaandeItems openstaandItem">
                             <th>
@@ -56,7 +56,7 @@ and open the template in the editor.
                                     {{ betaling['datum'] }}
                                 </td>
                                 <td>
-                                    <input type="checkbox" name="betaald[]" class="checkboxBetaald">
+                                    <input type="checkbox" name="betaald[{{ betaling['kavel'] }}]" class="checkboxBetaald">
                                 </td>
                             </tr>
                         {% endfor %}

@@ -658,4 +658,12 @@ class EntityManager {
                 
                 return $betalingen;
     }
+    
+    function sluitBetalingenOpKavel(Kavel $kavel){
+        $sql = "UPDATE bieding SET betaald = true WHERE kavel_id = :kavelnummer";
+        
+                $stmt = $this->connection->prepare($sql);
+                $stmt->bindValue('kavelnummer', $kavel->getKavelNummer());
+                $stmt->execute();
+    }
 }
